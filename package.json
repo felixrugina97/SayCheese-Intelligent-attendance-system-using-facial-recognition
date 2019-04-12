@@ -1,0 +1,24 @@
+{
+  "name": "saycheese",
+  "version": "1.0.0",
+  "description": "Final Year Project",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felixrugina97/SayCheese.git"
+  },
+  "author": "Felix Rugina",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/felixrugina97/SayCheese/issues"
+  },
+  "homepage": "https://github.com/felixrugina97/SayCheese#readme",
+  "dependencies": {
+    "electron": "^4.1.4",
+    "electron-reload": "^1.4.0",
+    "mysql": "^2.16.0"
+  }
+}

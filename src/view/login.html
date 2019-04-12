@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style/login.css">
+    <script src="../js/login.js"></script>
+    <title>Say Cheese</title>
+</head>
+<body>
+    <div class="login-container">
+        <div class="title-bar"></div>
+        <div class="login-box">
+            <svg viewbox="0 0 10 10">
+                <circle class="smile" cx="5" cy="5" r="4"
+                    stroke-dashoffset="-.5"
+                    stroke-dasharray="11.5,13.6327" />
+                <circle class="eyes" cx="5" cy="5" r="4" 
+                    stroke-dashoffset="-15.5"
+                    stroke-dasharray="0,6.6327,0,17.5" />
+            </svg>
+            <h3>Sign In</h3>
+            <form>
+                <div class="input-box">
+                    <span><i class="fas fa-user"></i></span>
+                    <input type="text" name="" placeholder="Username">
+                </div>
+                <div class="input-box">
+                    <span><i class="fas fa-lock"></i></span>
+                    <input type="password" name="" placeholder="Password"> 
+                </div>
+                <input type="submit" value="Login" onclick="login()">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
