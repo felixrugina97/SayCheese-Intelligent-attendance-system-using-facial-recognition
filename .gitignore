@@ -62,3 +62,6 @@ typings/
 
 # ignore DS_STORE
 **/.DS_STORE
+
+# folder to ignore
+model
