@@ -2,12 +2,17 @@
     font-family: Roboto-Medium;
     src: url("../../assets/fonts/Roboto-Medium.ttf");
 }
+
 body, html {
     background-color:#212121;
     margin:0;
     padding:0;
     height: 100%;
     width: 100%;
+}
+
+p {
+    color: red;
 }
 
 .login-container {
@@ -57,7 +62,7 @@ body, html {
     border-bottom: 2px solid #F5F5F5;
 }
 
-.login-box input[type="submit"] {
+.login-box input[type="button"] {
     border: none;
     outline: none;
     height: 40px;
@@ -68,7 +73,7 @@ body, html {
     border-radius: 10px;
 }
 
-.login-box input[type="submit"]:hover {
+.login-box input[type="button"]:hover {
     color: #424242;
     background-color: #F5F5F5;
     cursor: pointer;
@@ -125,4 +130,61 @@ svg {
         transform: scale(1, 1);
         stroke-width: 0.1px; 
     }
+}
+
+.popup {
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.popup .popup-text {
+    visibility: hidden;
+    width: 160px;
+    background-color: #CF000F;
+    color: #F5F5F5;
+    text-align: center;
+    font-size: 10px;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+    font-family: 'Roboto-Medium';
+}
+
+.popup .popup-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #CF000F transparent transparent transparent;
+}
+  
+.popup .show {
+    visibility: visible;
+    animation: fadeOut 0.5s 1;
+    -webkit-animation: fadeOut 0.5s 1;
+    animation-fill-mode: forwards;
+
+    animation-delay: 1.5s;
+    -webkit-animation-delay: 1.5s;
+    -webkit-animation-fill-mode: forwards;
+}
+  
+@keyframes fadeOut{
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+@-webkit-keyframes fadeOut{
+    from {opacity: 1;}
+    to {opacity: 0;}
 }

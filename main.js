@@ -2,9 +2,10 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 const exec = require('child_process').exec;
-
 const {app, BrowserWindow, Menu} = electron;
-const logger = require('./utils/logger').Logger;
+
+const logger = require('./config/logger').Logger;
+const mainMenuTemplate = require('./config/menu_template');
 
 const fileName = 'root::main.js';
 
@@ -12,7 +13,7 @@ let loaderWindow;
 let loginWindow;
 let mainWindow;
 
-exec('sh utils/init_log_file.sh');
+exec('sh config/init_log_file.sh');
 
 app.on('ready', function() {
     logger.debug("SayCheese started", fileName);
@@ -22,7 +23,8 @@ app.on('ready', function() {
         width: 250, 
         height: 300, 
         frame: false, 
-        resizable: false
+        resizable: false,
+        backgroundColor: '#212121'
     });
     
     logger.debug("Creating Login Window", fileName);
@@ -32,7 +34,8 @@ app.on('ready', function() {
         show: false,
         resizable: true,
         maximizable: false,
-        titleBarStyle: 'hidden'
+        titleBarStyle: 'hidden',
+        backgroundColor: '#212121'
     });
 
     loginWindow.on('closed', function(){
@@ -64,6 +67,7 @@ function openLogin() {
 exports.openWindow = (filename) => {
     mainWindow = new BrowserWindow({
         titleBarStyle: 'hidden',
+        backgroundColor: '#212121'
     });
 
     if (filename == 'admin_index') {
@@ -74,49 +78,11 @@ exports.openWindow = (filename) => {
         logger.debug("Loading Teacher Window", fileName);
         mainWindow.loadURL(`file://${__dirname}/src/view/teacher_view/` + filename + `.html`);
     }
+    else if (filename == 'exit') {
+        app.quit();
+    }
     
     mainWindow.on('closed', function(){
         app.quit();
     })
-}
-
-const mainMenuTemplate = [
-    {
-        label: 'File',
-            submenu: [
-                {
-                    label: 'Quit',
-                    accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
-                    click() {
-                        app.quit();
-                    }
-                }
-            ]
-    },
-    {
-        label: "Help",
-            submenu: [
-                {
-                    label: 'About'
-                } 
-            ]
-    }
-];
-
-if (process.env.NODE_ENV != 'production') {
-    mainMenuTemplate.push({
-        label: 'Developer Tools',
-        submenu:[
-            {
-                label: 'Toggle DevTools',
-                accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
-                click(item, focusedWindow){
-                    focusedWindow.toggleDevTools();
-                }
-            },
-            {
-                role: 'reload'
-            }
-        ]
-    });
 }
