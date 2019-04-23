@@ -11,10 +11,6 @@ body, html {
     width: 100%;
 }
 
-p {
-    color: red;
-}
-
 .login-container {
     display: flex;
     flex-direction: column;
@@ -143,7 +139,7 @@ svg {
 .popup .popup-text {
     visibility: hidden;
     width: 160px;
-    background-color: #CF000F;
+    background-color: #E74C3C;
     color: #F5F5F5;
     text-align: center;
     font-size: 10px;
@@ -165,7 +161,7 @@ svg {
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: #CF000F transparent transparent transparent;
+    border-color: #E74C3C transparent transparent transparent;
 }
   
 .popup .show {

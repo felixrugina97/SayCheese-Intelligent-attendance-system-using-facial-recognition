@@ -22,8 +22,8 @@ body, html {
 
 .content {
     position: relative;
-    width: calc(100%-65px);
-    height: calc(100%-3.5%);
+    padding-left: 65px;
+    height: calc(100%-20px);
     text-align: center;
 }
 

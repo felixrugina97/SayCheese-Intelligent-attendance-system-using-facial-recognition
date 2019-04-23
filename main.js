@@ -1,6 +1,4 @@
 const electron = require('electron');
-const url = require('url');
-const path = require('path');
 const exec = require('child_process').exec;
 const {app, BrowserWindow, Menu} = electron;
 
@@ -67,7 +65,9 @@ function openLogin() {
 exports.openWindow = (filename) => {
     mainWindow = new BrowserWindow({
         titleBarStyle: 'hidden',
-        backgroundColor: '#212121'
+        backgroundColor: '#212121',
+        'minWidth': 180,
+        'minHeight': 150
     });
 
     if (filename == 'admin_index') {
@@ -81,6 +81,16 @@ exports.openWindow = (filename) => {
     else if (filename == 'exit') {
         app.quit();
     }
+
+    mainWindow.on('enter-full-screen', function(){
+        mainWindow.webContents.send('fullScreen');
+        logger.debug("User enter full screen", fileName);
+    });
+
+    mainWindow.on('leave-full-screen', function(){
+        mainWindow.webContents.send('leaveFullScreen');
+        logger.debug("User leave full screen", fileName);
+    });
     
     mainWindow.on('closed', function(){
         app.quit();

@@ -1,6 +1,7 @@
 const remote = require('electron').remote;
 const main = remote.require('./main.js');
 const sha256 = require('sha256');
+const $ = require('jquery');
 
 const logger = require("./../../config/logger").Logger;
 const connection = require('./../../config/connection');
@@ -13,7 +14,7 @@ const userType = {
     TEACHER: 1
 };
 
-function login() {
+$('#login-button').click(function() {
     var email = $('#email').val();
     var password = sha256($('#password').val()).toString('base64');
 
@@ -48,18 +49,17 @@ function login() {
             }
         });
     }
-}
+});
 
-function checkUserType(result, email) {
+function checkUserType(currentUserType, email) {
     var window = remote.getCurrentWindow();
-    
-    if (result == userType.ADMIN) {
+    if (currentUserType == userType.ADMIN) {
         logger.info("User " + email + " logged in as Admin with success", fileName);
         main.openWindow('admin_index');
         window.hide();
         logger.debug("Login window hidden with success", fileName);
     }
-    else if (result == userType.TEACHER) {
+    else if (currentUserType == userType.TEACHER) {
         logger.info("User " + email + " logged in as Teacher with success", fileName);
         main.openWindow('teacher_index');
         window.hide();
