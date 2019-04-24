@@ -1,15 +1,15 @@
-const remote = require('electron').remote;
-const main = remote.require('./main.js');
-const sha256 = require('sha256');
-const $ = require('jquery');
+var remote = require('electron').remote;
+var main = remote.require('./main.js');
+var sha256 = require('sha256');
+var $ = require('jquery');
 
-const logger = require("./../../config/logger").Logger;
-const connection = require('./../../config/connection');
+var logger = require('./../../config/logger').Logger;
+var connection = require('./../../config/connection');
 
-const fileName = 'src::js::login.js';
-const EMPTY_PASSWORD = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+var fileName = 'src::js::login.js';
+var EMPTY_PASSWORD = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
 
-const userType = {
+var userType = {
     ADMIN: 0,
     TEACHER: 1
 };
@@ -66,3 +66,7 @@ function checkUserType(currentUserType, email) {
         logger.debug("Login window hidden with success", fileName);
     }
 }
+
+// $('#exit-button').click(function() {
+//     main.openWindow('exit');
+// });

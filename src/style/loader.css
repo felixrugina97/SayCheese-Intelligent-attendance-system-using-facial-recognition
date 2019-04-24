@@ -2,6 +2,12 @@
     font-family: Roboto-Medium;
     src: url("../../assets/fonts/Roboto-Medium.ttf");
 }
+
+@font-face {
+    font-family: Roboto-Regular;
+    src: url("../../assets/fonts/Roboto-Regular.ttf");
+}
+
 body {
     height:100vh;
     background:#212121;
@@ -41,7 +47,7 @@ h1 {
 }
 
 h2 {
-    font-family: 'Roboto-Medium'; 
+    font-family: 'Roboto-Regular'; 
     font-size: 10px;
     font-weight: 60;
     color:#757575;

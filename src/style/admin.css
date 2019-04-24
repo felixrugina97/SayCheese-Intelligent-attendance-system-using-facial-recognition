@@ -3,7 +3,7 @@
     src: url("../../assets/fonts/Roboto-Medium.ttf");
 }
 
-body, html {
+body {
     background-color:#212121;
     margin:0;
     padding:0;
@@ -11,7 +11,7 @@ body, html {
     width: 100%;
 }
 
-.page-content {
+.navigation {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -22,12 +22,78 @@ body, html {
 
 .content {
     position: relative;
-    padding-left: 65px;
-    height: calc(100%-20px);
+    padding-left: 60px;
+    height: calc(100% - 20px);
     text-align: center;
 }
 
 .content h1 {
     font-family: 'Roboto-Medium';
     color: #F5F5F5;
+}
+
+.page {
+    display: none;
+}
+
+.exit-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+    font-family: 'Roboto-Medium';
+    color: #F5F5F5;
+}
+
+.exit-modal a {
+    text-decoration: none;
+}
+
+.exit-modal-content {
+    margin: 30% auto;
+    width: 35%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 
+        0 7px 20px 0 rgba(0, 0, 0, 0.15);
+    animation-name: open-modal; 
+    animation-duration: 0.3s;
+}
+
+@keyframes open-modal {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.exit-modal-header {
+    background: #424242;
+    padding: 0.2px;
+    color: white;
+}
+
+.exit-modal-footer {
+    width: 100%;
+} 
+
+.exit-modal-button.confirm, .exit-modal-button.cancel {
+    float: left;
+    width: 50%;
+    height: 30px;
+    text-align: center;
+    outline: none;
+    text-align: center;
+    line-height: 30px;
+    color: #F5F5F5; 
+    background-color: #212121;
+}
+
+.exit-modal-button.confirm:hover {
+    background-color: #27AE60;
+}
+
+.exit-modal-button.cancel:hover {
+    background-color: #E74C3C;
 }

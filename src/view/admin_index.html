@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style/admin.css">
+    <link rel="stylesheet" href="../style/navigation_bar.css">
+    <title>Say Cheese</title>
+</head>
+<body>
+    <div class="navigation">
+        <div class="title-bar"></div>
+        <nav class="main-menu">
+            <ul>
+                <li class="page-link" data-page="manage-students">
+                    <a href="#"><i class="fa fa-users-cog"></i><span class="nav-text">Manage Students</span></a>
+                </li>
+                <li class="page-link" data-page="add-student">
+                    <a href="#"><i class="fa fa-user-graduate"></i><span class="nav-text">Add Student</span></a>      
+                </li>
+                <li class="page-link" data-page="add-teacher">
+                    <a href="#"><i class="fa fa-chalkboard-teacher"></i><span class="nav-text">Add Teacher</span></a>
+                </li>
+            </ul>
+            <ul class="exit">
+                <li class="exit-button">
+                    <a href="#"><i class="fa fa-sign-out-alt"></i><span class="nav-text">Exit</span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>  
+    <main class="content">
+        <section class="page manage-students-page">
+            <div>
+                <h1>Manage Students</h1>
+            </div>
+        </section>
+        <section class="page add-student-page">
+            <div>
+                <h1>Add Student</h1>
+            </div>
+        </section>
+        <section class="page add-teacher-page">
+            <div>
+                <h1>Add Teacher</h1>
+            </div>
+        </section>
+        <div class="exit-modal">
+            <div class="exit-modal-content">
+                <div class="exit-modal-header">
+                    <h4>Are you sure you want to exit?</h4>
+                </div>
+                <div class="exit-modal-footer">
+                    <a href="#" class="exit-modal-button confirm">Yes</a>
+                    <a href="#" class="exit-modal-button cancel">No</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript" src="../js/title_bar_handler.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
+    <script type="text/javascript" src="../js/admin/admin_index.js"></script>
+</body>
+</html>

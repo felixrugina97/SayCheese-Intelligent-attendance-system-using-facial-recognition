@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const env = require('custom-env').env(true);
 
-const logger = require('./logger').Logger;
+var logger = require('./logger').Logger;
 
-const fileName = 'utils::connection.js';
+var fileName = 'utils::connection.js';
 
 var connection = mysql.createConnection({
 	host     : process.env.DB_HOST,

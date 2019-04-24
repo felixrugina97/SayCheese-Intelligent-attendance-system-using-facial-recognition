@@ -1,17 +1,19 @@
 const electron = require('electron');
 const exec = require('child_process').exec;
 const {app, BrowserWindow, Menu} = electron;
+const path = require('path')
 
-const logger = require('./config/logger').Logger;
-const mainMenuTemplate = require('./config/menu_template');
+var logger = require('./config/logger').Logger;
+var mainMenuTemplate = require('./config/menu_template');
 
-const fileName = 'root::main.js';
+var fileName = 'root::main.js';
 
 let loaderWindow;
 let loginWindow;
 let mainWindow;
 
 exec('sh config/init_log_file.sh');
+app.setName("SayCheese");
 
 app.on('ready', function() {
     logger.debug("SayCheese started", fileName);
@@ -22,7 +24,8 @@ app.on('ready', function() {
         height: 300, 
         frame: false, 
         resizable: false,
-        backgroundColor: '#212121'
+        backgroundColor: '#212121',
+        icon: path.join(__dirname, 'assets/icons/256x256.icns')
     });
     
     logger.debug("Creating Login Window", fileName);
@@ -33,7 +36,8 @@ app.on('ready', function() {
         resizable: true,
         maximizable: false,
         titleBarStyle: 'hidden',
-        backgroundColor: '#212121'
+        backgroundColor: '#212121',
+        icon: path.join(__dirname, 'assets/icons/256x256.icns')
     });
 
     loginWindow.on('closed', function(){
@@ -66,17 +70,18 @@ exports.openWindow = (filename) => {
     mainWindow = new BrowserWindow({
         titleBarStyle: 'hidden',
         backgroundColor: '#212121',
-        'minWidth': 180,
-        'minHeight': 150
+        'minWidth': 200,
+        'minHeight': 150,
+        icon: path.join(__dirname, 'assets/icons/256x256.icns')
     });
 
     if (filename == 'admin_index') {
         logger.debug("Loading Admin Window", fileName);
-        mainWindow.loadURL(`file://${__dirname}/src/view/admin_view/` + filename + `.html`);
+        mainWindow.loadURL(`file://${__dirname}/src/view/` + filename + `.html`);
     }
     else if (filename == 'teacher_index') {
         logger.debug("Loading Teacher Window", fileName);
-        mainWindow.loadURL(`file://${__dirname}/src/view/teacher_view/` + filename + `.html`);
+        mainWindow.loadURL(`file://${__dirname}/src/view/` + filename + `.html`);
     }
     else if (filename == 'exit') {
         app.quit();

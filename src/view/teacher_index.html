@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style/teacher.css">
+    <link rel="stylesheet" href="../style/navigation_bar.css">
+    <title>Say Cheese</title>
+</head>
+<body>
+    <div class="navigation">
+        <div class="title-bar"></div>
+        <nav class="main-menu">
+            <ul>
+                <li class="page-link" data-page="dashboard">
+                    <a href="#"><i class="fa fa-chart-line"></i><span class="nav-text">Dashboard</span></a>
+                </li>
+                <li class="page-link" data-page="make-attendance">
+                    <a href="#"><i class="fa fa-calendar-alt"></i><span class="nav-text">Make Attendance</span></a>      
+                </li>
+                <li class="page-link" data-page="manage-courses">
+                    <a href="#"><i class="fa fa-chalkboard-teacher"></i><span class="nav-text">Manage Courses</span></a>
+                </li>
+            </ul>
+            <ul class="exit">
+                <li class="exit-button">
+                    <a href="#"><i class="fa fa-sign-out-alt"></i><span class="nav-text">Exit</span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>  
+    <main class="content">
+        <section class="page dashboard-page">
+            <div>
+                <h1>Dashboard</h1>
+            </div>
+        </section>
+        <section class="page make-attendance-page">
+            <div>
+                <h1>Make Attendance</h1>
+            </div>
+        </section>
+        <section class="page manage-courses-page">
+            <div>
+                <h1>Manage Courses</h1>
+            </div>
+        </section>
+        <div class="exit-modal">
+            <div class="exit-modal-content">
+                <div class="exit-modal-header">
+                    <h4>Are you sure you want to exit?</h4>
+                </div>
+                <div class="exit-modal-footer">
+                    <a href="#" class="exit-modal-button confirm">Yes</a>
+                    <a href="#" class="exit-modal-button cancel">No</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript" src="../js/title_bar_handler.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
+    <script type="text/javascript" src="../js/teacher/teacher_index.js"></script>
+</body>
+</html>

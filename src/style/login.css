@@ -3,6 +3,11 @@
     src: url("../../assets/fonts/Roboto-Medium.ttf");
 }
 
+@font-face {
+    font-family: Roboto-Regular;
+    src: url("../../assets/fonts/Roboto-Regular.ttf");
+  }
+
 body, html {
     background-color:#212121;
     margin:0;
@@ -47,7 +52,7 @@ body, html {
     height: 30px;
     color: #F5F5F5;
     background: transparent;
-    font-family: 'Roboto-Medium';
+    font-family: 'Roboto-Regular';
     font-size: 14px;
     padding-left: 20px;
     box-sizing: border-box;
