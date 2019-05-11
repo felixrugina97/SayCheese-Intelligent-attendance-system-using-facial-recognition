@@ -21,7 +21,7 @@
                     <a href="#"><i class="fa fa-calendar-alt"></i><span class="nav-text">Make Attendance</span></a>      
                 </li>
                 <li class="page-link" data-page="manage-courses">
-                    <a href="#"><i class="fa fa-chalkboard-teacher"></i><span class="nav-text">Manage Courses</span></a>
+                    <a href="#" class="manage-courses"><i class="fa fa-chalkboard-teacher"></i><span class="nav-text">Manage Courses</span></a>
                 </li>
             </ul>
             <ul class="exit">
@@ -44,14 +44,91 @@
         </section>
         <section class="page manage-courses-page">
             <div>
-                <h1>Manage Courses</h1>
+                <div>
+                    <h1>Manage Courses</h1>
+                </div>
+                <div class="course-table">
+                    <table id="courses">
+                        <thead>
+                            <tr>
+                            <th>Course ID</th>
+                            <th>Course name</th>
+                            <th>Course type</th>
+                            <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="add-course">
+                    <input type="button" id="add-course-button" value="Create course">
+                </div>
             </div>
         </section>
+        <div class="add-course-modal">
+            <div class="add-course-modal-content">
+                <div class="add-course-modal-header">
+                    <div class="x-button"><span>&times;</span></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="add-course-modal-body">
+                        <h1>Create course</h1>
+                        <form>
+                            <div class="popup">
+                                <span class="popup-text" id="name-popup"></span>
+                            </div>
+                            <div class="input-box">
+                                <p>Enter course name:</p>
+                                <input type="text" id="course-name" placeholder="Course name">
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="type-popup"></span>
+                            </div>
+                            <div class="input-box">
+                                <p>Select course type:</p>
+                                <select id="select-course-type" name="Course Type">
+                                    <option disabled selected value>Select a course</option>
+                                    <option value="0">Weekly</option>
+                                    <option value="1">Biweekly</option>
+                                </select>
+                            </div>
+                        </form>
+                </div>
+                <div style="clear:both;"></div>
+                <div class="add-course-modal-footer">
+                    <a href="#" class="add-course-modal-button confirm">Create</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="confirm-delete-course-modal">
+            <div class="confirm-delete-course-modal-content">
+                <div class="confirm-delete-course-modal-header">
+                    <div class="x-button"><span>&times;</span></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="confirm-delete-course-modal-body">
+                        <p id="confirm-delete-course-text"></p>
+                </div>
+                <div style="clear:both;"></div>
+                <div class="confirm-delete-course-modal-footer">
+                    <a href="#" class="confirm-delete-course-modal-button confirm">Confirm</a>
+                    <a href="#" class="confirm-delete-course-modal-button cancel">Cancel</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
         <div class="exit-modal">
             <div class="exit-modal-content">
                 <div class="exit-modal-header">
-                    <h4>Are you sure you want to exit?</h4>
+                    <div class="x-button"><span>&times;</span></div>
+                    <div style="clear:both;"></div>
                 </div>
+                <div class="exit-modal-body">
+                        <p>Are you sure you want to exit?</p>
+                </div>
+                <div style="clear:both;"></div>
                 <div class="exit-modal-footer">
                     <a href="#" class="exit-modal-button confirm">Yes</a>
                     <a href="#" class="exit-modal-button cancel">No</a>
@@ -60,8 +137,9 @@
             </div>
         </div>
     </main>
-    <script type="text/javascript" src="../js/title_bar_handler.js"></script>
     <script type="text/javascript" src="../js/login.js"></script>
-    <script type="text/javascript" src="../js/teacher/teacher_index.js"></script>
+    <script type="text/javascript" src="../js/title_bar_handler.js"></script>
+    <script type="text/javascript" src="../js/teacher_index.js"></script>
+    <script type="text/javascript" src="../js/teacher_manage_courses.js"></script>
 </body>
 </html>

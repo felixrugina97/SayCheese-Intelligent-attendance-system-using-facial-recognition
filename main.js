@@ -82,6 +82,7 @@ exports.openWindow = (filename) => {
     else if (filename == 'teacher_index') {
         logger.debug("Loading Teacher Window", fileName);
         mainWindow.loadURL(`file://${__dirname}/src/view/` + filename + `.html`);
+        let server = require('./src/js/teacher_server')
     }
     else if (filename == 'exit') {
         app.quit();

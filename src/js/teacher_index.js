@@ -27,6 +27,11 @@ $('.exit-modal-button.cancel').click(function(){
     logger.info("User left exit modal view by clicking cancel button", fileName);
 });
 
+$('.exit-modal-header > div.x-button').click(function(){
+    $('.exit-modal').hide();
+    logger.info("User left exit modal view by clicking X button", fileName);
+});
+
 $('html').click(function (e) {
     if (e.target.className == 'exit-modal') {
         $('.exit-modal').hide();

@@ -3,6 +3,16 @@
     src: url("../../assets/fonts/Roboto-Medium.ttf");
 }
 
+@font-face {
+    font-family: Roboto-Light;
+    src: url("../../assets/fonts/Roboto-Light.ttf");
+}
+
+@font-face {
+    font-family: Roboto-Regular;
+    src: url("../../assets/fonts/Roboto-Regular.ttf");
+}
+
 body {
     background-color:#212121;
     margin:0;
@@ -36,10 +46,370 @@ body {
     display: none;
 }
 
+@keyframes open-modal {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* [COURSE TABLE] */
+.course-table {
+    width: calc(100% - 40px);
+    height: 400px;
+    overflow-y: auto;
+    float: left;
+    margin-left: 20px;
+}
+
+/* scrollbar */
+.course-table::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+.course-table::-webkit-scrollbar-track {
+    background-color: #BDBDBD;
+}
+.course-table::-webkit-scrollbar-thumb {
+    background-color: #757575;
+}
+
+#courses {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    background-color: #363636;
+}
+  
+#courses td, #courses th {
+    padding: 10px;
+}
+
+#courses th {
+    position: sticky;
+    top: 0;
+    background-color: #363636;
+    font-family: 'Roboto-Light';
+}
+
+#courses tbody {
+    width: 100%;
+    overflow: auto;
+    height: 100px;
+}
+  
+#courses tr {
+    color: #F5F5F5;
+    font-family: 'Roboto-Regular';
+}
+  
+#courses tr:hover {
+    background-color: #2b2b2b;
+}
+  
+#courses th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: white;
+    background-color: #2b2b2b;
+}
+
+#courses td, #courses th {
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+}
+#courses tr:first-child th {
+    border-top: 0;
+}
+#courses tr:last-child td {
+    border-bottom: 0;
+}
+#courses tr td:first-child,
+#courses tr th:first-child {
+    border-left: 0;
+}
+#courses tr td:last-child,
+#courses tr th:last-child {
+    border-right: 0;
+}
+
+.course-table-controls {
+    color: #F5F5F5;
+    font-size: 16px;
+    text-align: center;
+}
+
+.course-table-controls>i.far.fa-edit:hover {
+    color: #27AE60;
+    cursor: pointer;
+}
+
+.course-table-controls>i.far.fa-trash-alt:hover {
+    color: #E74C3C;
+    cursor: pointer;
+}
+/* END [COURSE TABLE] */
+
+#add-course-button {
+    border: none;
+    outline: none;
+    height: 40px;
+    font-size: 14px;
+    font-family: 'Roboto-Medium';
+    color: #F5F5F5;
+    background-color: #424242;
+    border-radius: 5px;
+}
+
+#add-course-button:hover {
+    color: #424242;
+    background-color: #F5F5F5;
+    cursor: pointer;
+}
+  
+.add-course {
+    position: fixed;
+    bottom: 20%;
+    right: 45%;
+}
+
+/* [ADD COURSE MODAl] */
+.add-course-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    font-family: 'Roboto-Medium';
+    color: #F5F5F5;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);  
+    overflow-y: auto;
+}
+
+.add-course-modal a {
+    text-decoration: none;
+}
+
+.add-course-modal-content {
+    margin: 0 auto;
+    width: 500px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 
+        0 7px 20px 0 rgba(0, 0, 0, 0.15);
+    animation-name: open-modal; 
+    animation-duration: 0.3s;
+    position: relative;
+    top: calc(100% - 500px);
+}
+
+.add-course-modal-header {
+    background: #212121;
+    padding: 0.2px;
+    color: white;
+}
+
+.add-course-modal-header > div.x-button {
+    float: right;
+    font-size: 20px;
+    margin-right: 10px; 
+}
+
+.add-course-modal-header > div.x-button:hover {
+    color: #E74C3C;
+    cursor: pointer;
+}
+
+.add-course-modal-body {
+    height: 100%;
+    background-color: #424242;
+    padding: 10px 20px;
+}
+
+.add-course-modal-body input {
+    width: 50%;
+    background: #212121;
+    margin-bottom: 20px;
+}
+
+.add-course-modal-body input[type="text"] {
+    border: none;
+    border-bottom: 2px solid #757575;
+    outline: none;
+    height: 30px;
+    color: #F5F5F5;
+    background: transparent;
+    font-family: 'Roboto-Regular';
+    font-size: 14px;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
+.add-course-modal-body input[type="text"]:focus {
+    border-bottom: 2px solid #F5F5F5;
+}
+
+.add-course-modal-footer {
+    width: 100%;
+}
+
+.add-course-modal-button.confirm {
+    float: left;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    outline: none;
+    text-align: center;
+    line-height: 30px;
+    color: #F5F5F5; 
+    background-color: #212121;
+}
+
+.add-course-modal-button.confirm:hover {
+    background-color: #27AE60;
+}
+
+.popup {
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.popup .popup-text {
+    visibility: hidden;
+    width: 160px;
+    background-color: #E74C3C;
+    color: #F5F5F5;
+    text-align: center;
+    font-size: 10px;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+    font-family: 'Roboto-Medium';
+}
+
+.popup .popup-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #E74C3C transparent transparent transparent;
+}
+  
+.popup .show {
+    visibility: visible;
+    animation: fadeOut 0.5s 1;
+    -webkit-animation: fadeOut 0.5s 1;
+    animation-fill-mode: forwards;
+
+    animation-delay: 1.5s;
+    -webkit-animation-delay: 1.5s;
+    -webkit-animation-fill-mode: forwards;
+}
+  
+@keyframes fadeOut{
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+@-webkit-keyframes fadeOut{
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+/* END [ADD COURSE MODAl] */
+
+/* [DELETE COURSE MODAL]*/
+.confirm-delete-course-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+    font-family: 'Roboto-Medium';
+    color: #F5F5F5;
+}
+
+.confirm-delete-course-modal a {
+    text-decoration: none;
+}
+
+.confirm-delete-course-modal-content {
+    margin: 25% auto;
+    width: 250px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 
+        0 7px 20px 0 rgba(0, 0, 0, 0.15);
+    animation-name: open-modal; 
+    animation-duration: 0.3s;
+}
+
+.confirm-delete-course-modal-header {
+    background: #212121;
+    padding: 0.2px;
+    color: white;
+}
+
+.confirm-delete-course-modal-header > div.x-button {
+    float: right;
+    font-size: 20px;
+    margin-right: 10px; 
+}
+
+.confirm-delete-course-modal-header > div.x-button:hover {
+    color: #E74C3C;
+    cursor: pointer;
+}
+
+.confirm-delete-course-modal-body {
+    height: 100%;
+    background-color: #424242;
+    padding: 10px 20px;
+}
+
+.confirm-delete-course-modal-footer {
+    width: 100%;
+}
+
+.confirm-delete-course-modal-button.confirm, .confirm-delete-course-modal-button.cancel {
+    float: left;
+    width: 50%;
+    height: 30px;
+    text-align: center;
+    outline: none;
+    text-align: center;
+    line-height: 30px;
+    color: #F5F5F5; 
+    background-color: #212121;
+}
+
+.confirm-delete-course-modal-button.confirm:hover {
+    background-color: #27AE60;
+}
+
+.confirm-delete-course-modal-button.cancel:hover {
+    background-color: #E74C3C;
+}
+/* END [DELETE COURSE MODAL]*/
+
+/* [EXIT MODAL]*/
 .exit-modal {
     display: none;
     position: fixed;
-    z-index: 10000;
+    z-index: 1000;
     left: 0;
     top: 0;
     height: 100%;
@@ -55,28 +425,40 @@ body {
 }
 
 .exit-modal-content {
-    margin: 30% auto;
-    width: 35%;
+    margin: 25% auto;
+    width: 250px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 
         0 7px 20px 0 rgba(0, 0, 0, 0.15);
     animation-name: open-modal; 
     animation-duration: 0.3s;
 }
 
-@keyframes open-modal {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-
 .exit-modal-header {
-    background: #424242;
+    background: #212121;
     padding: 0.2px;
     color: white;
 }
 
+.exit-modal-header > div.x-button {
+    float: right;
+    font-size: 20px;
+    margin-right: 10px; 
+}
+
+.exit-modal-header > div.x-button:hover {
+    color: #E74C3C;
+    cursor: pointer;
+}
+
+.exit-modal-body {
+    height: 100%;
+    background-color: #424242;
+    padding: 10px 20px;
+}
+
 .exit-modal-footer {
     width: 100%;
-} 
+}
 
 .exit-modal-button.confirm, .exit-modal-button.cancel {
     float: left;
@@ -97,3 +479,4 @@ body {
 .exit-modal-button.cancel:hover {
     background-color: #E74C3C;
 }
+/* END [EXIT MODAL]*/

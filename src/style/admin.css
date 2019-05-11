@@ -69,14 +69,30 @@ body {
 }
 
 .exit-modal-header {
-    background: #424242;
-    padding: 0.2px;
-    color: white;
+    background: #212121;
+    margin: 0;
+}
+
+.exit-modal-header > div.x-button {
+    float: right;
+    font-size: 20px;
+    margin-right: 10px; 
+}
+
+.exit-modal-header > div.x-button:hover {
+    color: #E74C3C;
+    cursor: pointer;
+}
+
+.exit-modal-body {
+    height: 100%;
+    background-color: #424242;
+    padding: 10px 20px;
 }
 
 .exit-modal-footer {
     width: 100%;
-} 
+}
 
 .exit-modal-button.confirm, .exit-modal-button.cancel {
     float: left;

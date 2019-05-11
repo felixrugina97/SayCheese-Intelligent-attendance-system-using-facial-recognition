@@ -9,6 +9,7 @@ var connection = require('./../../config/connection');
 var fileName = 'src::js::login.js';
 var EMPTY_PASSWORD = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
 
+var userID = null;
 var userType = {
     ADMIN: 0,
     TEACHER: 1
@@ -29,9 +30,11 @@ $('#login-button').click(function() {
         logger.info("User didn't fill password field" , fileName);
     }
     else {
-        connection.query('SELECT * FROM User WHERE email = ?', [email], function(err, result, fields) {
+        let sql = 'SELECT * FROM User WHERE email = ?';
+        connection.query(sql, [email], function(err, result, fields) {
             if (result.length > 0) {
                 if(result[0].password == password) {
+                    userID = result[0].ID;
                     checkUserType(result[0].userType, email);
                 }
                 else {
@@ -58,15 +61,27 @@ function checkUserType(currentUserType, email) {
         main.openWindow('admin_index');
         window.hide();
         logger.debug("Login window hidden with success", fileName);
+        sendUserID();
     }
     else if (currentUserType == userType.TEACHER) {
         logger.info("User " + email + " logged in as Teacher with success", fileName);
         main.openWindow('teacher_index');
         window.hide();
         logger.debug("Login window hidden with success", fileName);
+        sendUserID();
     }
 }
 
-// $('#exit-button').click(function() {
-//     main.openWindow('exit');
-// });
+function sendUserID() {
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:3000/userID',
+        data: {ID : userID},
+        success : function(data) {
+            logger.debug("User ID sent with success", fileName);
+        },
+        error : function(jqXHR, textStatus, err) {
+            logger.error("Failed to send userID. Text status: " + textStatus + " Error is: " + err);
+        }
+    });
+}
