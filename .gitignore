@@ -64,4 +64,8 @@ typings/
 **/.DS_STORE
 
 # folder to ignore
-model
+data/recognizer
+data/data_set
+
+# .vscode
+.vscode

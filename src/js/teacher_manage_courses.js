@@ -1,4 +1,7 @@
 var $ = jQuery = require('jquery');
+var logger = require('../../config/logger').Logger;
+
+var fileName = 'src::js::teacher_manage_courses.js';
 
 $(function() {
     selectCourses();
@@ -10,7 +13,6 @@ function selectCourses() {
         type: 'GET',
         url: 'http://localhost:3000/course',
         success: function(data) {
-            console.log(data);
             $.each(data, function(i, data) {
                 var courseType;
                 if (data.courseType == 0) {
@@ -34,6 +36,7 @@ function selectCourses() {
             });
         }
     });
+    logger.debug("Table with curses created with success", fileName);
 }
 
 $('.add-course-modal-button.confirm').click(function(){
@@ -53,6 +56,7 @@ $('.add-course-modal-button.confirm').click(function(){
     else {
         sendCourseData(courseName, courseType);
         $('.add-course-modal').hide();
+        logger.debug("User sent course data with success to the server", fileName);
     }
 });
 
@@ -83,10 +87,10 @@ $('#courses tbody').on('click', '#delete-course', function() {
 
     $('#confirm-delete-course-text').empty();
     $('#confirm-delete-course-text').append("Are you sure you want to " +
-        "<span style=\"color:#E74C3C\"><strong>DELETE</strong></span> <strong>" + 
+        "<span style=\"color:#E74C3C\"><strong>DELETE</strong></span> <strong>" +
         deletCourseName + "</strong> course?");
 
-    $('.confirm-delete-course-modal').show();    
+    $('.confirm-delete-course-modal').show();
 })
 
 $('.confirm-delete-course-modal-button.confirm').click(function() {

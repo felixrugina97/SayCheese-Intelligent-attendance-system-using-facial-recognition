@@ -12,7 +12,9 @@ let loaderWindow;
 let loginWindow;
 let mainWindow;
 
-exec('sh config/init_log_file.sh');
+exec('sh config/scripts/init_log_file.sh');
+exec('sh config/scripts/run_flask_server.sh');
+
 app.setName("SayCheese");
 
 app.on('ready', function() {
@@ -20,14 +22,14 @@ app.on('ready', function() {
 
     logger.debug("Creating Loader Window", fileName);
     loaderWindow = new BrowserWindow({
-        width: 250, 
-        height: 300, 
-        frame: false, 
+        width: 250,
+        height: 300,
+        frame: false,
         resizable: false,
         backgroundColor: '#212121',
         icon: path.join(__dirname, 'assets/icons/256x256.icns')
     });
-    
+
     logger.debug("Creating Login Window", fileName);
     loginWindow = new BrowserWindow({
         width: 300,
@@ -42,6 +44,7 @@ app.on('ready', function() {
 
     loginWindow.on('closed', function(){
         logger.debug("SayCheese closed with success", fileName);
+        exec('sh config/scripts/kill_flask_server.sh');
         app.quit();
     });
 
@@ -97,7 +100,7 @@ exports.openWindow = (filename) => {
         mainWindow.webContents.send('leaveFullScreen');
         logger.debug("User leave full screen", fileName);
     });
-    
+
     mainWindow.on('closed', function(){
         app.quit();
     })
