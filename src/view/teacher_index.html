@@ -18,7 +18,7 @@
                     <a href="#"><i class="fa fa-chart-line"></i><span class="nav-text">Dashboard</span></a>
                 </li>
                 <li class="page-link" data-page="make-attendance">
-                    <a href="#"><i class="fa fa-calendar-alt"></i><span class="nav-text">Make Attendance</span></a>      
+                    <a href="#"><i class="fa fa-calendar-alt"></i><span class="nav-text">Make Attendance</span></a>
                 </li>
                 <li class="page-link" data-page="manage-courses">
                     <a href="#" class="manage-courses"><i class="fa fa-chalkboard-teacher"></i><span class="nav-text">Manage Courses</span></a>
@@ -30,7 +30,7 @@
                 </li>
             </ul>
         </nav>
-    </div>  
+    </div>
     <main class="content">
         <section class="page dashboard-page">
             <div>
@@ -40,6 +40,51 @@
         <section class="page make-attendance-page">
             <div>
                 <h1>Make Attendance</h1>
+                <div class="make-attendance-form">
+                    <form method="POST">
+                        <p>Select course:</p>
+                        <div class="select-box">
+                            <select id="select-course-for-attendance" name="Course">
+                                <option disabled selected value>Select course</option>
+                            </select>
+                        </div>
+                        <div class="select-box">
+                            <select id="select-week-for-attendance" name="Week">
+                                <option disabled selected value>Select week</option>
+                                <option>01</option>
+                                <option>02</option>
+                                <option>03</option>
+                                <option>04</option>
+                                <option>05</option>
+                                <option>06</option>
+                                <option>07</option>
+                                <option>08</option>
+                                <option>09</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                                <option>13</option>
+                                <option>14</option>
+                            </select>
+                        </div>
+                        <div class="select-box">
+                            <select id="select-hour-for-attendance" name="Hour">
+                                <option disabled selected value>Select hour</option>
+                                <option>08:00</option>
+                                <option>09:40</option>
+                                <option>11:20</option>
+                                <option>13:00</option>
+                                <option>14:40</option>
+                                <option>16:20</option>
+                                <option>18:00</option>
+                                <option>19:40</option>
+                            </select>
+                        </div>
+                        <div class="start-attendance">
+                            <input type="button" id="start-attendance-button" value="Create course">
+                        </div>
+                    </form>
+                </div>
             </div>
         </section>
         <section class="page manage-courses-page">
@@ -85,10 +130,10 @@
                             <div class="popup">
                                 <span class="popup-text" id="type-popup"></span>
                             </div>
-                            <div class="input-box">
-                                <p>Select course type:</p>
+                            <p>Select course type:</p>
+                            <div class="select-box">
                                 <select id="select-course-type" name="Course Type">
-                                    <option disabled selected value>Select a course</option>
+                                    <option disabled selected value>Select course</option>
                                     <option value="0">Weekly</option>
                                     <option value="1">Biweekly</option>
                                 </select>
@@ -141,5 +186,6 @@
     <script type="text/javascript" src="../js/title_bar_handler.js"></script>
     <script type="text/javascript" src="../js/teacher_index.js"></script>
     <script type="text/javascript" src="../js/teacher_manage_courses.js"></script>
+    <script type="text/javascript" src="../js/teacher_make_attendance.js"></script>
 </body>
 </html>
