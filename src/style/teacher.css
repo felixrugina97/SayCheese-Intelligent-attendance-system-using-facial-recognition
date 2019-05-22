@@ -81,7 +81,7 @@ body {
     text-align: left;
     background-color: #363636;
 }
-
+  
 #courses td, #courses th {
     padding: 10px;
 }
@@ -98,16 +98,16 @@ body {
     overflow: auto;
     height: 100px;
 }
-
+  
 #courses tr {
     color: #F5F5F5;
     font-family: 'Roboto-Regular';
 }
-
+  
 #courses tr:hover {
     background-color: #2b2b2b;
 }
-
+  
 #courses th {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -116,7 +116,7 @@ body {
 }
 
 #courses td, #courses th {
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3); 
 }
 #courses tr:first-child th {
     border-top: 0;
@@ -166,7 +166,7 @@ body {
     background-color: #F5F5F5;
     cursor: pointer;
 }
-
+  
 .add-course {
     position: fixed;
     bottom: 20%;
@@ -186,7 +186,7 @@ body {
     color: #F5F5F5;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.3);  
     overflow-y: auto;
 }
 
@@ -197,9 +197,9 @@ body {
 .add-course-modal-content {
     margin: 0 auto;
     width: 500px;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2),
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 
         0 7px 20px 0 rgba(0, 0, 0, 0.15);
-    animation-name: open-modal;
+    animation-name: open-modal; 
     animation-duration: 0.3s;
     position: relative;
     top: calc(100% - 500px);
@@ -214,7 +214,7 @@ body {
 .add-course-modal-header > div.x-button {
     float: right;
     font-size: 20px;
-    margin-right: 10px;
+    margin-right: 10px; 
 }
 
 .add-course-modal-header > div.x-button:hover {
@@ -229,7 +229,7 @@ body {
 }
 
 .add-course-modal-body input {
-    width: 30%;
+    width: 50%;
     background: #212121;
     margin-bottom: 20px;
 }
@@ -243,8 +243,8 @@ body {
     background: transparent;
     font-family: 'Roboto-Regular';
     font-size: 14px;
+    padding-left: 20px;
     box-sizing: border-box;
-    text-align: center;
 }
 
 .add-course-modal-body input[type="text"]:focus {
@@ -263,7 +263,7 @@ body {
     outline: none;
     text-align: center;
     line-height: 30px;
-    color: #F5F5F5;
+    color: #F5F5F5; 
     background-color: #212121;
 }
 
@@ -306,7 +306,7 @@ body {
     border-style: solid;
     border-color: #E74C3C transparent transparent transparent;
 }
-
+  
 .popup .show {
     visibility: visible;
     animation: fadeOut 0.5s 1;
@@ -317,7 +317,7 @@ body {
     -webkit-animation-delay: 1.5s;
     -webkit-animation-fill-mode: forwards;
 }
-
+  
 @keyframes fadeOut{
     from {opacity: 1;}
     to {opacity: 0;}
@@ -351,9 +351,9 @@ body {
 .confirm-delete-course-modal-content {
     margin: 25% auto;
     width: 250px;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2),
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 
         0 7px 20px 0 rgba(0, 0, 0, 0.15);
-    animation-name: open-modal;
+    animation-name: open-modal; 
     animation-duration: 0.3s;
 }
 
@@ -366,7 +366,7 @@ body {
 .confirm-delete-course-modal-header > div.x-button {
     float: right;
     font-size: 20px;
-    margin-right: 10px;
+    margin-right: 10px; 
 }
 
 .confirm-delete-course-modal-header > div.x-button:hover {
@@ -392,7 +392,7 @@ body {
     outline: none;
     text-align: center;
     line-height: 30px;
-    color: #F5F5F5;
+    color: #F5F5F5; 
     background-color: #212121;
 }
 
@@ -427,9 +427,9 @@ body {
 .exit-modal-content {
     margin: 25% auto;
     width: 250px;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2),
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 
         0 7px 20px 0 rgba(0, 0, 0, 0.15);
-    animation-name: open-modal;
+    animation-name: open-modal; 
     animation-duration: 0.3s;
 }
 
@@ -442,7 +442,7 @@ body {
 .exit-modal-header > div.x-button {
     float: right;
     font-size: 20px;
-    margin-right: 10px;
+    margin-right: 10px; 
 }
 
 .exit-modal-header > div.x-button:hover {
@@ -468,7 +468,7 @@ body {
     outline: none;
     text-align: center;
     line-height: 30px;
-    color: #F5F5F5;
+    color: #F5F5F5; 
     background-color: #212121;
 }
 
@@ -480,4 +480,3 @@ body {
     background-color: #E74C3C;
 }
 /* END [EXIT MODAL]*/
-

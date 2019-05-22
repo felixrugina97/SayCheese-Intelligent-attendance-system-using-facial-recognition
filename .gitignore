@@ -65,10 +65,3 @@ typings/
 
 # folder to ignore
 model
-
-#data
-data/data_set
-data/saycheese.mwb.bak
-
-# .vscode
-.vscode/*
