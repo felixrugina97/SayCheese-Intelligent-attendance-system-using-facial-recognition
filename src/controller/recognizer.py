@@ -44,9 +44,20 @@ def get_profile(student_id, cursor):
     return profile
 
 def start_attendance(camera, cursor, database):
-    face_cascade = cv2.CascadeClassifier('../../data/haarcascade/haarcascade_frontalface_default.xml')
+    current_path = os.path.dirname(os.path.realpath(__file__))
+
+    haarcascade_folder = "../../data/haarcascade"
+    haarcascade_file = "haarcascade_frontalface_default.xml"
+    haarcascade_path = os.path.join(current_path, haarcascade_folder, haarcascade_file)
+    face_cascade = cv2.CascadeClassifier(haarcascade_path)
+
     recognizer = cv2.face.LBPHFaceRecognizer_create()
-    recognizer.read('../../data/recognizer/trainingData.yml')
+
+    yml_folder = "../../data/recognizer"
+    yml_file = "trainingData.yml"
+    yml_path = os.path.join(current_path, yml_folder, yml_file)
+    recognizer.read(yml_path)
+
     font = cv2.FONT_HERSHEY_DUPLEX
 
     attendance = []
@@ -54,7 +65,6 @@ def start_attendance(camera, cursor, database):
     week = None
     hour = None
 
-    current_path = os.path.dirname(os.path.realpath(__file__))
     create_to = "../../data"
     file_name = "attendance_data.txt"
     file_path = os.path.join(current_path, create_to, file_name)

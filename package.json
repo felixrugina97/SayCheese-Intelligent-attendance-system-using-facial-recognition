@@ -19,7 +19,6 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "custom-env": "^1.0.0",
-    "ejs": "^2.6.1",
     "electron": "^4.1.4",
     "electron-json-storage": "^4.1.6",
     "electron-reload": "^1.4.0",
@@ -27,6 +26,7 @@
     "express-session": "^1.16.1",
     "jquery": "^3.4.0",
     "mysql": "^2.16.0",
+    "python-shell": "^1.0.7",
     "sha256": "^0.2.0"
   }
 }

@@ -41,12 +41,16 @@
             <div>
                 <h1>Make Attendance</h1>
                 <div class="make-attendance-form">
-                    <form method="POST">
+                    <form method="POST" id="start-attendance-form">
                         <p>Select course:</p>
+                        <div class="popup">
+                            <span class="popup-text" id="attendance-course"></span>
+                        </div>
                         <div class="select-box">
-                            <select id="select-course-for-attendance" name="Course">
-                                <option disabled selected value>Select course</option>
-                            </select>
+                            <select id="select-course-for-attendance" name="Course"></select>
+                        </div>
+                        <div class="popup">
+                            <span class="popup-text" id="attendance-week"></span>
                         </div>
                         <div class="select-box">
                             <select id="select-week-for-attendance" name="Week">
@@ -67,6 +71,9 @@
                                 <option>14</option>
                             </select>
                         </div>
+                        <div class="popup">
+                            <span class="popup-text" id="attendance-hour"></span>
+                        </div>
                         <div class="select-box">
                             <select id="select-hour-for-attendance" name="Hour">
                                 <option disabled selected value>Select hour</option>
@@ -84,6 +91,9 @@
                             <input type="button" id="start-attendance-button" value="Create course">
                         </div>
                     </form>
+                    <div class="train-data">
+                        <input type="button" id="train-data-button" value="Train data">
+                    </div>
                 </div>
             </div>
         </section>
