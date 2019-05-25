@@ -2,7 +2,6 @@ var $ = jQuery = require('jquery');
 var logger = require('../../config/logger').Logger;
 var ps = require('python-shell')
 var path = require('path')
-var exec = require('child_process').exec;
 
 var fileName = 'src::js::teacher_make_attendace.js';
 
@@ -92,8 +91,7 @@ $('#train-data-button').click(function() {
     }
 
     ps.PythonShell.run('trainer.py', options, function(err, results) {
-        if (err)
-        {
+        if (err) {
             throw err;
         }
         $('#train-data-button').attr("disabled", false);

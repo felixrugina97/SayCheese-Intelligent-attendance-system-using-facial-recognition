@@ -57,6 +57,8 @@ $('.add-course-modal-button.confirm').click(function(){
     else {
         sendCourseData(courseName, courseType);
         $('.add-course-modal').hide();
+        $('#course-name').val('');
+        $("#select-course-type").prop('selectedIndex', 0);
         logger.debug("User sent course data with success to the server", fileName);
     }
 });
@@ -161,6 +163,75 @@ function selectAndFillAssignedCourseTable() {
     logger.debug("Table with assigned courses created with success", fileName);
 }
 
+var specialization = null;
+var studyYear = null;
+var group = null;
+var subgroup = null;
+$('.edit-course-modal-button.confirm').click(function(){
+    specialization = $('#select-specialization-for-assigment').children("option:selected").text();;
+    studyYear = $("#select-study-year-for-assigment").val();
+    group = $("#select-group-for-assigment").val();
+    subgroup = $("#select-subgroup-for-assigment").val();
+
+    if (specialization == "Select specialization") {
+        var popup = $("#assign-specialization").text("Please select specialization")[0];
+        popup.classList.toggle("show");
+        popup.classList.toggle("hide");
+        logger.info("User didn't select specialization" , fileName);
+    }
+    else if (studyYear == null) {
+        var popup = $("#assign-study-year").text("Please select study year")[0];
+        popup.classList.toggle("show");
+        logger.info("User didn't select study year" , fileName);
+    }
+    else if (group == null) {
+        var popup = $("#assign-group").text("Please select group")[0];
+        popup.classList.toggle("show");
+        logger.info("User didn't select group" , fileName);
+    }
+    else if (subgroup == null) {
+        var popup = $("#assign-subgroup").text("Please select subgroup")[0];
+        popup.classList.toggle("show");
+        logger.info("User didn't select subgroup" , fileName);
+    }
+    else {
+        $('#confirm-assign-student-text').empty();
+        $('#confirm-assign-student-text').append("Are you sure you want ASSIGN students from <br>" +
+            specialization + "<br> Study year: " + studyYear + "<br> Group: " + group + "<br> Subgroup: " + subgroup +
+            " to this course?"
+        );
+        $('.confirm-assign-student-modal').show();
+    }
+});
+
+$('.confirm-assign-student-modal-button.confirm').click(function() {
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:3000/assignStudentsToCourse',
+        data: {
+            assignedCourseID : assignedCourseID,
+            specialization : specialization,
+            studyYear : studyYear,
+            group : group,
+            subgroup : subgroup,
+        },
+        success : function(data) {
+            $("#assigned-course-table tbody").empty();
+            selectAndFillAssignedCourseTable()
+            logger.debug("Teacher deleted with success assigned course", fileName);
+        },
+        error : function(jqXHR, textStatus, err) {
+            logger.error("Failed to delete assigned course. Text status: " + textStatus + " Error is: " + err);
+        }
+    });
+    $('.confirm-assign-student-modal').hide();
+    $('#select-specialization-for-assigment').prop('selectedIndex', 0);
+    $("#select-study-year-for-assigment").prop('selectedIndex', 0);
+    $("#select-group-for-assigment").prop('selectedIndex', 0);
+    $("#select-subgroup-for-assigment").prop('selectedIndex', 0);
+    logger.debug("User sent assign data with success to the server", fileName);
+});
+
 $('.confirm-delete-course-modal-button.confirm').click(function() {
     $.ajax({
         type: 'POST',
@@ -228,6 +299,48 @@ $('.delete-assigned-course-modal-button.confirm').click(function() {
     $('.delete-assigned-course-modal').hide();
 });
 
+function searchCourse() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("search-courses");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("courses");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            }
+            else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function searchAssigned() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("search-assigned");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("assigned-course-table");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[2];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            }
+            else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
 $('#add-course-button').click(function() {
     $('.add-course-modal').show();
     logger.info("User enter on add course modal view", fileName);
@@ -263,3 +376,14 @@ $('.delete-assigned-course-modal-button.cancel').click(function(){
     $('.delete-assigned-course-modal').hide();
     logger.info("User left delete assigned course modal view by clicking cancel button", fileName);
 });
+
+$('.confirm-assign-student-modal-button.cancel').click(function(){
+    $('.confirm-assign-student-modal').hide();
+    logger.info("User left assign students modal view by clicking cancel button", fileName);
+});
+
+$('.confirm-assign-student-modal-header > div.x-button').click(function(){
+    $('.confirm-assign-student-modal').hide();
+    logger.info("User left assign students modal view by clicking X button", fileName);
+});
+

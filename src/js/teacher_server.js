@@ -26,16 +26,16 @@ app.get('/course', function(req, res){
 });
 
 getCourses = function() {
-    let sql = 'SELECT * FROM Course WHERE teacherID = ? ORDER BY ID, courseName';
+    let sqlSelectCourses = 'SELECT * FROM Course WHERE teacherID = ? ORDER BY ID, courseName';
     return new Promise(function (resolve, reject){
-        connection.query(sql, [teacherID], function(err, result, fields) {
+        connection.query(sqlSelectCourses, [teacherID], function(err, result, fields) {
             if (!err) {
                 resolve(result);
                 logger.debug("Courses selected with success from database", fileName);
             }
             else {
                 reject(err);
-                logger.error("Failed to select courses." + " Error is: " + err);
+                logger.error("Failed to select courses." + " Error is: " + err, fileName);
             }
         })
     });
@@ -109,6 +109,43 @@ app.post('/deleteCourse', (req, res) => {
     })
 });
 
+app.post('/assignStudentsToCourse', (req, res) => {
+    let specialization = req.body.specialization;
+    let studyYear = req.body.studyYear;
+    let group = req.body.group;
+    let subgroup = req.body.subgroup;
+    let courseID = req.body.assignedCourseID;
+
+    let sqlSelectStudentID = 'SELECT Student.ID FROM Student WHERE Student.specialization = ?' +
+    'AND Student.studyYear = ? AND Student.group = ? AND Student.subgroup = ?;'
+
+    connection.query(sqlSelectStudentID, [specialization, studyYear, group, subgroup], function(err, result) {
+        if (err) {
+            logger.error("Failed to select students for assigment" + " Error is: " + err);
+            throw err;
+        }
+        logger.debug("Students selected with success from database for assigment", fileName);
+        if (result && result.length > 0) {
+            var sqlAssignStudentsToCourse = 'INSERT IGNORE INTO Student_Courses_Assignment (courseID, studentID) VALUES ?;'
+            var values = [];
+            for (var i = 0; i < result.length; i++) {
+                values.push([courseID, result[i].ID]);
+            }
+            connection.query(sqlAssignStudentsToCourse, [values], function(err, result) {
+                if (err) {
+                    logger.error("Failed to assign students to course" + " Error is: " + err);
+                    throw err;
+                }
+                res.json({ok: true});
+                logger.debug("Students assigned with success to course", fileName);
+            });
+        }
+        else {
+            logger.debug("No students found for this query on assigment", fileName);
+        }
+    });
+});
+
 app.post('/deleteAssignedCourse', (req, res) => {
     let profile = req.body.deleteAssignedCourseProfile;
     let specialization = req.body.deleteAssignedCourseSpecialization;
@@ -127,8 +164,7 @@ app.post('/deleteAssignedCourse', (req, res) => {
     'COMMIT;'
 
     connection.query(sqlAssignedDeleteCourseAndAttendance, [profile, specialization, studyYear, group, subgroup, courseID], function(err, result) {
-        if (err)
-        {
+        if (err) {
             logger.error("Failed to delete assigned course and attendances" + " Error is: " + err);
             throw err;
         }

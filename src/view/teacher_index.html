@@ -99,8 +99,15 @@
         </section>
         <section class="page manage-courses-page">
             <div>
-                <div>
+                <div class="header-text">
                     <h1>Manage Courses</h1>
+                </div>
+                <div class="add-course">
+                    <input type="button" id="add-course-button" value="Create course">
+                </div>
+                <div class="search">
+                    <input type="text" id="search-courses" onkeyup="searchCourse()" placeholder="Search course by name" title="Type in a name">
+                    <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                 </div>
                 <div class="course-table">
                     <table id="courses">
@@ -115,9 +122,6 @@
                         <tbody>
                         </tbody>
                     </table>
-                </div>
-                <div class="add-course">
-                    <input type="button" id="add-course-button" value="Create course">
                 </div>
             </div>
         </section>
@@ -176,6 +180,10 @@
                     </div>
                     <div class="edit-course-page header-view-courses-page">
                         <h1 id="#edit-course-modal-course-name"></h1>
+                        <div class="search-assigned">
+                            <input type="text" id="search-assigned" onkeyup="searchAssigned()" placeholder="Search by study year" title="Type in a name">
+                            <button type="submit" class="search-button-assigned"><i class="fas fa-search"></i></button>
+                        </div>
                         <div class="assigned-course">
                             <table id="assigned-course-table">
                                 <thead>
@@ -194,21 +202,30 @@
                         </div>
                             <div style="clear:both;"></div>
                             <div class="edit-modal-footer">
-                            <a href="#" class="edit-course-modal-button confirm"></a>
+                            <a href="#" class="edit-course-modal-button footer"></a>
                             <div style="clear:both;"></div>
                         </div>
                     </div>
                     <div class="edit-course-page header-assign-courses-page">
-                        <form method="POST" id="start-attendance-form">
+                        <h1>Assign students</h1>
+                        <form method="POST" id="edit-attendance-form">
+                            <div class="popup">
+                                <span class="popup-text" id="assign-specialization"></span>
+                            </div>
                             <div class="select-box">
-                                <select id="select-profile-for-assigment" name="Profile">
+                                <p>Select specialization:</p>
+                                <select id="select-specialization-for-assigment" name="Profile">
                                     <option disabled selected value>Select specialization</option>
                                     <option>Informatica</option>
                                     <option>Informatica Aplicata</option>
                                     <option>Informatica Engleza</option>
                                 </select>
                             </div>
+                            <div class="popup">
+                                <span class="popup-text" id="assign-study-year"></span>
+                            </div>
                             <div class="select-box">
+                                <p>Select study year:</p>
                                 <select id="select-study-year-for-assigment" name="Study Year">
                                     <option disabled selected value>Select study year</option>
                                     <option>1</option>
@@ -216,8 +233,12 @@
                                     <option>3</option>
                                 </select>
                             </div>
+                            <div class="popup">
+                                <span class="popup-text" id="assign-group"></span>
+                            </div>
                             <div class="select-box">
-                                <select id="select-group-year-for-assigment" name="Group">
+                                <p>Select group:</p>
+                                <select id="select-group-for-assigment" name="Group">
                                     <option disabled selected value>Select group</option>
                                     <option>1</option>
                                     <option>2</option>
@@ -227,8 +248,12 @@
                                     <option>6</option>
                                 </select>
                             </div>
+                            <div class="popup">
+                                <span class="popup-text" id="assign-subgroup"></span>
+                            </div>
                             <div class="select-box">
-                                <select id="select-subgroup-year-for-assigment" name="Subgroup">
+                                <p>Select subgroup:</p>
+                                <select id="select-subgroup-for-assigment" name="Subgroup">
                                     <option disabled selected value>Select subgroup</option>
                                     <option>1</option>
                                     <option>2</option>
@@ -238,8 +263,8 @@
                                     <option>6</option>
                                 </select>
                             </div>
+                            <p></p>
                     </form>
-                    <div style="clear:both;"></div>
                     <div class="edit-modal-footer">
                         <a href="#" class="edit-course-modal-button confirm">Assign</a>
                         <div style="clear:both;"></div>
@@ -282,6 +307,23 @@
                 </div>
             </div>
         </div>
+        <div class="confirm-assign-student-modal">
+            <div class="confirm-assign-student-modal-content">
+                <div class="confirm-assign-student-modal-header">
+                    <div class="x-button"><span>&times;</span></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="confirm-assign-student-modal-body">
+                        <p id="confirm-assign-student-text"></p>
+                </div>
+                <div style="clear:both;"></div>
+                <div class="confirm-assign-student-modal-footer">
+                    <a href="#" class="confirm-assign-student-modal-button confirm">Confirm</a>
+                    <a href="#" class="confirm-assign-student-modal-button cancel">Cancel</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
         <div class="exit-modal">
             <div class="exit-modal-content">
                 <div class="exit-modal-header">
@@ -303,6 +345,7 @@
     <script type="text/javascript" src="../js/login.js"></script>
     <script type="text/javascript" src="../js/title_bar_handler.js"></script>
     <script type="text/javascript" src="../js/teacher_index.js"></script>
+    <script type="text/javascript" src="../js/teacher_dashboard.js"></script>
     <script type="text/javascript" src="../js/teacher_manage_courses.js"></script>
     <script type="text/javascript" src="../js/teacher_make_attendance.js"></script>
 </body>

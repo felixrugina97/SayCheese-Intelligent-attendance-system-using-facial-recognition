@@ -1,4 +1,5 @@
 import cv2
+import face_recognition
 import json
 import mysql.connector
 import numpy as np
@@ -6,6 +7,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 from dotenv import load_dotenv
+import pickle
 
 env_path = Path('../..') / '.env'
 load_dotenv(dotenv_path=env_path)
@@ -37,34 +39,24 @@ def is_assigned_to_course(cursor, student_id, course_id):
 def get_profile(student_id, cursor):
     sql_select_id = "SELECT * FROM Student WHERE ID = %s"
     cursor.execute(sql_select_id, (student_id,))
-    profile = None
+    studentProfile = None
     for row in cursor:
-        profile = row
+        studentProfile = row
 
-    return profile
+    return studentProfile
 
-def start_attendance(camera, cursor, database):
-    current_path = os.path.dirname(os.path.realpath(__file__))
-
-    haarcascade_folder = "../../data/haarcascade"
-    haarcascade_file = "haarcascade_frontalface_default.xml"
-    haarcascade_path = os.path.join(current_path, haarcascade_folder, haarcascade_file)
-    face_cascade = cv2.CascadeClassifier(haarcascade_path)
-
-    recognizer = cv2.face.LBPHFaceRecognizer_create()
-
-    yml_folder = "../../data/recognizer"
-    yml_file = "trainingData.yml"
-    yml_path = os.path.join(current_path, yml_folder, yml_file)
-    recognizer.read(yml_path)
-
-    font = cv2.FONT_HERSHEY_DUPLEX
-
+def start_attendance(camera, cursor, database, known_faces, known_face_names):
     attendance = []
+    studentProfile = []
+    unkownFaces = None
     course_id = None
     week = None
     hour = None
+    face_locations = []
+    face_encodings = []
+    process_this_frame = True
 
+    current_path = os.path.dirname(os.path.realpath(__file__))
     create_to = "../../data"
     file_name = "attendance_data.txt"
     file_path = os.path.join(current_path, create_to, file_name)
@@ -82,33 +74,59 @@ def start_attendance(camera, cursor, database):
     attendance_data.close()
 
     while True:
-        ret, img = camera.read()
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+        ret, frame = camera.read()
 
-        for (x, y, width, height) in faces:
-            cv2.rectangle(img, (x, y), (x + width, y + height), (0, 0, 255), 2)
-            student_id, conf = recognizer.predict(gray[y : y + height, x : x + width])
-            profile = get_profile(student_id, cursor)
-            if conf < 60:
-                if is_assigned_to_course(cursor, profile[0], course_id):
-                    conf = "{0}%".format(round(100 - conf))
-                    cv2.putText(img, "[" + str(conf) + "]", (x - 200, y + height), font, 2, (0, 255, 100), 2)
-                    cv2.putText(img, str(profile[1]) + " " +str(profile[2]), (x, y + height), font, 2, (0, 255, 0), 2)
-                    attendance.append([course_id, profile[0], datetime.today().strftime('%Y-%m-%d'), week, hour])
+        small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
+
+        rgb_small_frame = small_frame[:, :, ::-1]
+
+        if process_this_frame:
+            face_locations = face_recognition.face_locations(rgb_small_frame)
+            face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
+
+            face_names = []
+            for face_encoding in face_encodings:
+                matches = face_recognition.compare_faces(known_faces, face_encoding)
+                name = "Unknown"
+
+                face_distances = face_recognition.face_distance(known_faces, face_encoding)
+                best_match_index = np.argmin(face_distances)
+                if matches[best_match_index]:
+                    name = known_face_names[best_match_index]
+                    student_id = known_face_names[best_match_index]
+                    student_id = student_id[student_id.find("[")+1:student_id.find("]")]
+                    studentProfile = get_profile(student_id, cursor)
+
+                face_names.append(name)
+
+        process_this_frame = not process_this_frame
+
+        for (top, right, bottom, left), name in zip(face_locations, face_names):
+            top *= 4
+            right *= 4
+            bottom *= 4
+            left *= 4
+            if name != "Unknown":
+                if is_assigned_to_course(cursor, studentProfile[0], course_id):
+                    cv2.rectangle(frame, (left, top), (right, bottom), (255, 0, 0), 2)
+
+                    font = cv2.FONT_HERSHEY_DUPLEX
+                    cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+                    attendance.append([course_id, studentProfile[0], datetime.today().strftime('%Y-%m-%d'), week, hour])
                 else:
-                    conf = "{0}%".format(round(100 - conf))
-                    cv2.putText(img, "[" + str(conf) + "]", (x - 200, y + height), font, 2, (0, 255, 100), 2)
-                    cv2.putText(img, str(profile[1]) + " " +str(profile[2]), (x, y + height), font, 2, (0, 255, 0), 2)
-                    cv2.putText(img, "Not assigned to this course", (x, y + height + 50), font, 2, (0, 255, 0), 2)
-            else:
-                conf = "  {0}%".format(round(100 - conf))
-                cv2.putText(img, str(conf), (x, y + height), font, 2, (0, 255, 100), 2)
-                cv2.putText(img, "Unknown", (x, y + height + 50), font, 2, (0, 255, 0), 2)
+                    cv2.rectangle(frame, (left, top), (right, bottom), (255, 0, 0), 2)
 
-        cv2.imshow('Attendance', img)
-        k = cv2.waitKey(30) & 0xff
-        if k == 27:
+                    font = cv2.FONT_HERSHEY_DUPLEX
+                    cv2.putText(frame, name + " NOT ASSIGNED", (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+            else:
+                cv2.rectangle(frame, (left, top), (right, bottom), (255, 0, 0), 2)
+
+                font = cv2.FONT_HERSHEY_DUPLEX
+                cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+
+        cv2.imshow('Attendance', frame)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
             insert_attendance(attendance, database, cursor)
             break
 
@@ -129,7 +147,14 @@ def main():
     camera = cv2.VideoCapture(0)
     configure_camera(camera)
 
-    start_attendance(camera, cursor, database)
+    current_path = os.path.dirname(os.path.realpath(__file__))
+    trained_data = "../../data/trained_data/"
+    file_path = os.path.join(current_path, trained_data)
+
+    known_faces = pickle.load(open(file_path + "known_faces","rb"))
+    known_faces_names = pickle.load(open(file_path + "known_faces_names","rb"))
+
+    start_attendance(camera, cursor, database, known_faces, known_faces_names)
 
     camera.release()
     cv2.destroyAllWindows()

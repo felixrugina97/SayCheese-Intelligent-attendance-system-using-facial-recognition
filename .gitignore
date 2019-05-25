@@ -66,6 +66,7 @@ typings/
 # folder to ignore
 data/recognizer
 data/data_set
+students_photos/*
 
 # .vscode
 .vscode

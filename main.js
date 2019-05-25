@@ -73,6 +73,8 @@ exports.openWindow = (filename) => {
     mainWindow = new BrowserWindow({
         titleBarStyle: 'hidden',
         backgroundColor: '#212121',
+        width: 1000,
+        height: 750,
         'minWidth': 200,
         'minHeight': 150,
         icon: path.join(__dirname, 'assets/icons/256x256.icns')
@@ -81,6 +83,7 @@ exports.openWindow = (filename) => {
     if (filename == 'admin_index') {
         logger.debug("Loading Admin Window", fileName);
         mainWindow.loadURL(`file://${__dirname}/src/view/` + filename + `.html`);
+        let server = require('./src/js/admin_server')
     }
     else if (filename == 'teacher_index') {
         logger.debug("Loading Teacher Window", fileName);

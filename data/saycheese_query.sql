@@ -97,5 +97,7 @@
 -- START TRANSACTION;
 -- DELETE FROM Student_Courses_Assignment WHERE Student_Courses_Assignment.CourseID = 191;
 -- DELETE FROM Attendance WHERE Attendance.courseID = 191;
--- DELETE FROM Course WHERE Course.ID = 191;  
+-- DELETE FROM Course WHERE Course.ID = 191;
 -- COMMIT;
+
+-- INSERT IGNORE INTO Student_Courses_Assignment (courseID, studentID) VALUES(183, 1);

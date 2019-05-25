@@ -3,6 +3,16 @@
     src: url("../../assets/fonts/Roboto-Medium.ttf");
 }
 
+@font-face {
+    font-family: Roboto-Light;
+    src: url("../../assets/fonts/Roboto-Light.ttf");
+}
+
+@font-face {
+    font-family: Roboto-Regular;
+    src: url("../../assets/fonts/Roboto-Regular.ttf");
+}
+
 body {
     background-color:#212121;
     margin:0;
@@ -36,6 +46,109 @@ body {
     display: none;
 }
 
+/* [COURSE TABLE] */
+.student-table {
+    width: calc(100% - 40px);
+    height: 400px;
+    overflow-y: auto;
+    float: left;
+    margin-left: 20px;
+}
+
+/* scrollbar */
+.student-table::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+.student-table::-webkit-scrollbar-track {
+    background-color: #BDBDBD;
+}
+.student-table::-webkit-scrollbar-thumb {
+    background-color: #757575;
+}
+
+#students {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    background-color: #363636;
+}
+
+#students td, #students th {
+    padding: 10px;
+}
+
+#students th {
+    position: sticky;
+    top: 0;
+    background-color: #363636;
+    font-family: 'Roboto-Light';
+}
+
+#students tbody {
+    width: 100%;
+    overflow: auto;
+    height: 100px;
+}
+
+#students tr {
+    color: #F5F5F5;
+    font-family: 'Roboto-Regular';
+}
+
+#students tr:hover {
+    background-color: #2b2b2b;
+}
+
+#students th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: white;
+    background-color: #2b2b2b;
+}
+
+#students td, #courses th {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+#students tr:first-child th {
+    border-top: 0;
+}
+#students tr:last-child td {
+    border-bottom: 0;
+}
+#students tr td:first-child,
+#students tr th:first-child {
+    border-left: 0;
+}
+#students tr td:last-child,
+#students tr th:last-child {
+    border-right: 0;
+}
+
+.student-table-controls {
+    color: #F5F5F5;
+    font-size: 16px;
+    text-align: center;
+}
+
+.student-table-controls>i.fas.fa-file-upload {
+    padding-right: 5px;
+}
+
+.student-table-controls>i.fas.fa-file-upload:hover {
+    color: #27AE60;
+    cursor: pointer;
+}
+
+.student-table-controls>i.far.fa-trash-alt:hover {
+    color: #E74C3C;
+    cursor: pointer;
+}
+/* END [COURSE TABLE] */
+
 .exit-modal {
     display: none;
     position: fixed;
@@ -57,9 +170,9 @@ body {
 .exit-modal-content {
     margin: 30% auto;
     width: 35%;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2),
         0 7px 20px 0 rgba(0, 0, 0, 0.15);
-    animation-name: open-modal; 
+    animation-name: open-modal;
     animation-duration: 0.3s;
 }
 
@@ -76,7 +189,7 @@ body {
 .exit-modal-header > div.x-button {
     float: right;
     font-size: 20px;
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 
 .exit-modal-header > div.x-button:hover {
@@ -102,7 +215,7 @@ body {
     outline: none;
     text-align: center;
     line-height: 30px;
-    color: #F5F5F5; 
+    color: #F5F5F5;
     background-color: #212121;
 }
 

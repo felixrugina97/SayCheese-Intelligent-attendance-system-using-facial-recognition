@@ -18,7 +18,7 @@
                     <a href="#"><i class="fa fa-users-cog"></i><span class="nav-text">Manage Students</span></a>
                 </li>
                 <li class="page-link" data-page="add-student">
-                    <a href="#"><i class="fa fa-user-graduate"></i><span class="nav-text">Add Student</span></a>      
+                    <a href="#"><i class="fa fa-user-graduate"></i><span class="nav-text">Add Student</span></a>
                 </li>
                 <li class="page-link" data-page="add-teacher">
                     <a href="#"><i class="fa fa-chalkboard-teacher"></i><span class="nav-text">Add Teacher</span></a>
@@ -30,11 +30,31 @@
                 </li>
             </ul>
         </nav>
-    </div>  
+    </div>
     <main class="content">
         <section class="page manage-students-page">
             <div>
                 <h1>Manage Students</h1>
+                <div class="student-table">
+                    <table id="students">
+                        <thead>
+                            <tr>
+                            <th>ID</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>University</th>
+                            <th>Profile</th>
+                            <th>Specialization</th>
+                            <th>Study Year</th>
+                            <th>Group</th>
+                            <th>Subgroup</th>
+                            <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
         <section class="page add-student-page">
@@ -67,6 +87,7 @@
     </main>
     <script type="text/javascript" src="../js/title_bar_handler.js"></script>
     <script type="text/javascript" src="../js/login.js"></script>
-    <script type="text/javascript" src="../js/admin/admin_index.js"></script>
+    <script type="text/javascript" src="../js/admin_index.js"></script>
+    <script type="text/javascript" src="../js/admin_manage_students.js"></script>
 </body>
 </html>
