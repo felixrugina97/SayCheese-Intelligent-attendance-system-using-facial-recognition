@@ -82,11 +82,20 @@
 -- SELECT DISTINCT Course.courseName, Student.specialization, Student.studyYear, Student.group, Student.subgroup
 -- FROM Student_Courses_Assignment
 -- JOIN Student ON Student_Courses_Assignment.Student_ID = Student.ID
--- JOIN Course ON Student_Courses_Assignment.Course_ID = Course.ID;
-
--- DELETE Student_Courses_Assignment FROM Student_Courses_Assignment
--- JOIN Student ON Student_Courses_Assignment.Student_ID = Student.ID
 -- JOIN Course ON Student_Courses_Assignment.Course_ID = Course.ID
--- WHERE Student.group = 4;
+-- WHERE Course.ID = 183;
 
--- START TRANSACTION; DELETE FROM Course WHERE ID = 10; DELETE FROM Attendance WHERE courseID = 10; COMMIT;
+-- START TRANSACTION;
+-- DELETE Student_Courses_Assignment FROM Student_Courses_Assignment
+-- JOIN Student ON Student_Courses_Assignment.studentID = Student.ID
+-- JOIN Course ON Student_Courses_Assignment.courseID = Course.ID
+-- WHERE Student.profile = 4 AND Student.specialization = 4 AND Student.studyYear = 4
+-- AND Student.group = 4 AND Student.subgroup = 4;
+-- DELETE FROM Attendance WHERE Attendance.courseID = ?;
+-- COMMIT;
+
+-- START TRANSACTION;
+-- DELETE FROM Student_Courses_Assignment WHERE Student_Courses_Assignment.CourseID = 191;
+-- DELETE FROM Attendance WHERE Attendance.courseID = 191;
+-- DELETE FROM Course WHERE Course.ID = 191;  
+-- COMMIT;

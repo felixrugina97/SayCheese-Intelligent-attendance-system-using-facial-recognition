@@ -157,6 +157,114 @@
                 </div>
             </div>
         </div>
+        <div class="edit-course-modal">
+            <div class="edit-course-modal-content">
+                <div class="edit-course-modal-header">
+                    <div class="x-button"><span>&times;</span></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="edit-course-modal-body">
+                    <div class="edit-course-modal-navigation">
+                        <ul>
+                            <li class="header-page-link" data-page="header-view-courses">
+                                <a href="#">View Course</a>
+                            </li>
+                            <li  class="header-page-link" data-page="header-assign-courses">
+                                <a href="#">Assign Students</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="edit-course-page header-view-courses-page">
+                        <h1 id="#edit-course-modal-course-name"></h1>
+                        <div class="assigned-course">
+                            <table id="assigned-course-table">
+                                <thead>
+                                    <tr>
+                                    <th>Student Profile</th>
+                                    <th>Specialization</th>
+                                    <th>Study year</th>
+                                    <th>Group</th>
+                                    <th>Subgroup</th>
+                                    <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                            <div style="clear:both;"></div>
+                            <div class="edit-modal-footer">
+                            <a href="#" class="edit-course-modal-button confirm"></a>
+                            <div style="clear:both;"></div>
+                        </div>
+                    </div>
+                    <div class="edit-course-page header-assign-courses-page">
+                        <form method="POST" id="start-attendance-form">
+                            <div class="select-box">
+                                <select id="select-profile-for-assigment" name="Profile">
+                                    <option disabled selected value>Select specialization</option>
+                                    <option>Informatica</option>
+                                    <option>Informatica Aplicata</option>
+                                    <option>Informatica Engleza</option>
+                                </select>
+                            </div>
+                            <div class="select-box">
+                                <select id="select-study-year-for-assigment" name="Study Year">
+                                    <option disabled selected value>Select study year</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                            </div>
+                            <div class="select-box">
+                                <select id="select-group-year-for-assigment" name="Group">
+                                    <option disabled selected value>Select group</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                </select>
+                            </div>
+                            <div class="select-box">
+                                <select id="select-subgroup-year-for-assigment" name="Subgroup">
+                                    <option disabled selected value>Select subgroup</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                </select>
+                            </div>
+                    </form>
+                    <div style="clear:both;"></div>
+                    <div class="edit-modal-footer">
+                        <a href="#" class="edit-course-modal-button confirm">Assign</a>
+                        <div style="clear:both;"></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="delete-assigned-course-modal">
+            <div class="delete-assigned-course-modal-content">
+                <div class="delete-assigned-course-modal-header">
+                    <div class="x-button"><span>&times;</span></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="delete-assigned-course-modal-body">
+                    <p id="confirm-delete-assigned-course-text"></p>
+                </div>
+                <div style="clear:both;"></div>
+                <div class="delete-assigned-course-modal-footer">
+                    <a href="#" class="delete-assigned-course-modal-button confirm">Confirm</a>
+                    <a href="#" class="delete-assigned-course-modal-button cancel">Cancel</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
         <div class="confirm-delete-course-modal">
             <div class="confirm-delete-course-modal-content">
                 <div class="confirm-delete-course-modal-header">

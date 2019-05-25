@@ -25,7 +25,7 @@ def insert_attendance(attendance, database, cursor):
     database.commit()
 
 def is_assigned_to_course(cursor, student_id, course_id):
-    is_assigned = "SELECT * FROM SayCheese.Student_Courses_Assignment WHERE Student_ID = %s AND Course_ID = %s"
+    is_assigned = "SELECT * FROM SayCheese.Student_Courses_Assignment WHERE studentID = %s AND courseID = %s"
     cursor.execute(is_assigned, (student_id, course_id,))
     check_if_empty = cursor.fetchone()
 
@@ -90,7 +90,7 @@ def start_attendance(camera, cursor, database):
             cv2.rectangle(img, (x, y), (x + width, y + height), (0, 0, 255), 2)
             student_id, conf = recognizer.predict(gray[y : y + height, x : x + width])
             profile = get_profile(student_id, cursor)
-            if conf < 50:
+            if conf < 60:
                 if is_assigned_to_course(cursor, profile[0], course_id):
                     conf = "{0}%".format(round(100 - conf))
                     cv2.putText(img, "[" + str(conf) + "]", (x - 200, y + height), font, 2, (0, 255, 100), 2)
