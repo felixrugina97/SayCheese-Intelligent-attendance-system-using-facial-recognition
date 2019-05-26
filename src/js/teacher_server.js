@@ -19,6 +19,38 @@ app.post('/userID', (req, res) => {
     logger.debug("Teacher ID received with success", fileName);
 });
 
+app.get('/getStudents', function(req, res){
+    getStudents().then(function(response){
+        res.json(response);
+    });
+});
+
+getStudents = function() {
+    let sqlSelectStudentsAndAttendance = 'SELECT Student.firstName, Student.lastName, Student.studyYear, Student.group, Student.subgroup, ' +
+    'Student.specialization, Course.courseName, Attendance.week01, Attendance.week02, Attendance.week03, ' +
+    'Attendance.week04, Attendance.week05, Attendance.week06, Attendance.week07, Attendance.week08, Attendance.week09, '+
+    'Attendance.week10, Attendance.week11, Attendance.week12, Attendance.week13, Attendance.week14 '+
+    'FROM Student_Courses_Assignment ' +
+    'JOIN Student ON Student_Courses_Assignment.studentID = Student.ID ' +
+    'JOIN Course ON Student_Courses_Assignment.courseID = Course.ID ' +
+    'JOIN Attendance ON Student_Courses_Assignment.studentID = Attendance.studentID ' +
+    'AND Student_Courses_Assignment.courseID = Attendance.courseID ' +
+    'ORDER BY Course.courseName, Student.firstName, Student.lastName, Student.group, Student.subgroup'
+
+    return new Promise(function (resolve, reject){
+        connection.query(sqlSelectStudentsAndAttendance, function(err, result, fields) {
+            if (!err) {
+                resolve(result);
+                logger.debug("Students and attendance selected with success from database", fileName);
+            }
+            else {
+                reject(err);
+                logger.error("Failed to select students and attendance" + " Error is: " + err, fileName);
+            }
+        })
+    });
+}
+
 app.get('/course', function(req, res){
     getCourses().then(function(response){
         res.json(response);
@@ -126,12 +158,15 @@ app.post('/assignStudentsToCourse', (req, res) => {
         }
         logger.debug("Students selected with success from database for assigment", fileName);
         if (result && result.length > 0) {
-            var sqlAssignStudentsToCourse = 'INSERT IGNORE INTO Student_Courses_Assignment (courseID, studentID) VALUES ?;'
+            var sqlAssignStudentsToCourse = 'START TRANSACTION;' +
+            'INSERT IGNORE INTO Student_Courses_Assignment (courseID, studentID) VALUES ?;' +
+            'INSERT IGNORE INTO Attendance (courseID, studentID) VALUES ?;' +
+            'COMMIT;'
             var values = [];
             for (var i = 0; i < result.length; i++) {
                 values.push([courseID, result[i].ID]);
             }
-            connection.query(sqlAssignStudentsToCourse, [values], function(err, result) {
+            connection.query(sqlAssignStudentsToCourse, [values, values], function(err, result) {
                 if (err) {
                     logger.error("Failed to assign students to course" + " Error is: " + err);
                     throw err;

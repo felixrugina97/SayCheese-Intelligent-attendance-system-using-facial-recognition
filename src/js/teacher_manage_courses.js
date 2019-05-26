@@ -13,7 +13,6 @@ function selectCourses() {
         type: 'GET',
         url: 'http://localhost:3000/course',
         success: function(data) {
-            console.log(data);
             $.each(data, function(i, data) {
                 var courseType;
                 if (data.courseType == 0) {

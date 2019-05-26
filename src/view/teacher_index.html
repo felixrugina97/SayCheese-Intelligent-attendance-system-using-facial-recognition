@@ -14,7 +14,7 @@
         <div class="title-bar"></div>
         <nav class="main-menu">
             <ul>
-                <li class="page-link" data-page="dashboard">
+                <li class="page-link" id="dashboard" data-page="dashboard">
                     <a href="#"><i class="fa fa-chart-line"></i><span class="nav-text">Dashboard</span></a>
                 </li>
                 <li class="page-link" data-page="make-attendance">
@@ -35,6 +35,44 @@
         <section class="page dashboard-page">
             <div>
                 <h1>Dashboard</h1>
+                <div class="excel-raport">
+                    <input type="button" id="excel-raport-button" value="Excel raport">
+                </div>
+                <div class="search-student">
+                    <input type="text" id="search-students" onkeyup="searchStudents()" placeholder="Search course by name" title="Type in a name">
+                    <button type="submit" class="search-students-button"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="student-attendance">
+                    <table id="student-attendance-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Specialization</th>
+                                <th>Year</th>
+                                <th>Group</th>
+                                <th>Subgroup</th>
+                                <th>Course</th>
+                                <th>Week01</th>
+                                <th>Week02</th>
+                                <th>Week03</th>
+                                <th>Week04</th>
+                                <th>Week05</th>
+                                <th>Week06</th>
+                                <th>Week07</th>
+                                <th>Week08</th>
+                                <th>Week09</th>
+                                <th>Week10</th>
+                                <th>Week11</th>
+                                <th>Week12</th>
+                                <th>Week13</th>
+                                <th>Week14</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
         <section class="page make-attendance-page">
@@ -42,17 +80,18 @@
                 <h1>Make Attendance</h1>
                 <div class="make-attendance-form">
                     <form method="POST" id="start-attendance-form">
-                        <p>Select course:</p>
                         <div class="popup">
                             <span class="popup-text" id="attendance-course"></span>
                         </div>
                         <div class="select-box">
+                            <p>Select course:</p>
                             <select id="select-course-for-attendance" name="Course"></select>
                         </div>
                         <div class="popup">
                             <span class="popup-text" id="attendance-week"></span>
                         </div>
                         <div class="select-box">
+                            <p>Select week:</p>
                             <select id="select-week-for-attendance" name="Week">
                                 <option disabled selected value>Select week</option>
                                 <option>01</option>
@@ -75,6 +114,7 @@
                             <span class="popup-text" id="attendance-hour"></span>
                         </div>
                         <div class="select-box">
+                            <p>Select hour:</p>
                             <select id="select-hour-for-attendance" name="Hour">
                                 <option disabled selected value>Select hour</option>
                                 <option>08:00</option>
@@ -86,6 +126,7 @@
                                 <option>18:00</option>
                                 <option>19:40</option>
                             </select>
+                            <p></p>
                         </div>
                         <div class="start-attendance">
                             <input type="button" id="start-attendance-button" value="Create course">
@@ -113,10 +154,10 @@
                     <table id="courses">
                         <thead>
                             <tr>
-                            <th>Course ID</th>
-                            <th>Course name</th>
-                            <th>Course type</th>
-                            <th></th>
+                                <th>Course ID</th>
+                                <th>Course name</th>
+                                <th>Course type</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>

@@ -101,6 +101,116 @@ select:active {
     to {opacity: 1;}
 }
 
+/* [STUDENT ATTENDANCE TABLE] */
+.student-attendance {
+    width: calc(100% - 40px);
+    height: 550px;
+    overflow-y: auto;
+    overflow-x: auto;
+    float: left;
+    margin-left: 20px;
+}
+
+/* scrollbar */
+.student-attendance::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+.student-attendance::-webkit-scrollbar-track {
+    background-color: #BDBDBD;
+}
+.student-attendance::-webkit-scrollbar-thumb {
+    background-color: #757575;
+}
+
+#student-attendance-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    background-color: #363636;
+}
+
+#student-attendance-table td, #student-attendance-table th {
+    padding: 6px;
+}
+
+#student-attendance-table th {
+    position: sticky;
+    top: 0;
+    background-color: #363636;
+    font-family: 'Roboto-Light';
+}
+
+#student-attendance-table tbody {
+    width: 100%;
+    overflow: auto;
+    height: 100px;
+}
+
+#student-attendance-table tr {
+    color: #F5F5F5;
+    font-family: 'Roboto-Regular';
+}
+
+#student-attendance-table tr:hover {
+    background-color: #2b2b2b;
+}
+
+#student-attendance-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: white;
+    background-color: #2b2b2b;
+}
+
+#student-attendance-table td, #student-attendance-table th {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+#student-attendance-table tr:first-child th {
+    border-top: 0;
+}
+#student-attendance-table tr:last-child td {
+    border-bottom: 0;
+}
+#student-attendance-table tr td:first-child,
+#student-attendance-table tr th:first-child {
+    border-left: 0;
+}
+#student-attendance-table tr td:last-child,
+#student-attendance-table tr th:last-child {
+    border-right: 0;
+}
+/* END [STUDENT ATTENDACE TABLE] */
+
+#excel-raport-button {
+    border: none;
+    outline: none;
+    height: 36px;
+    font-size: 14px;
+    font-family: 'Roboto-Medium';
+    color: #F5F5F5;
+    background-color: #424242;
+    border-radius: 5px;
+    width: 150px;
+}
+
+#excel-raport-button:hover {
+    color: #424242;
+    background-color: #F5F5F5;
+    cursor: pointer;
+}
+
+.excel-raport {
+    position: relative;
+    display: flex;
+    float: right;
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
+
 /* [COURSE TABLE] */
 .course-table {
     width: calc(100% - 40px);
@@ -957,6 +1067,40 @@ select:active {
 }
 
 #search-assigned {
+    width: 150px;
+    border: 3px solid #333;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #333;
+}
+
+.search-students-button {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #333;
+    background: #333;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+    pointer-events: none;
+    outline: none;
+}
+
+.search-student {
+    width: 150px;
+    position: relative;
+    display: flex;
+    float: left;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+
+#search-students {
     width: 150px;
     border: 3px solid #333;
     border-right: none;

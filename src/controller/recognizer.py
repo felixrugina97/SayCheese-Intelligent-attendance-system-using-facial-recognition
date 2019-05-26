@@ -22,9 +22,11 @@ def insert_attendance(attendance, database, cursor):
             final_attendance.append(item)
             seen.add(current_item)
 
-    sql_insert_attendance = "INSERT INTO Attendance (CourseID, studentID, date, weekNumber, hour) VALUES (%s, %s, %s, %s, %s)"
-    cursor.executemany(sql_insert_attendance, final_attendance)
-    database.commit()
+    for item in final_attendance:
+        date = str(item[2]) + " " + str(item[4])
+        sql_update_attendance = "UPDATE Attendance SET week" + str(item[3]) + "= %s WHERE studentID = %s AND courseID = %s"
+        cursor.execute(sql_update_attendance, (date, str(item[1]), str(item[0]), ))
+        database.commit()
 
 def is_assigned_to_course(cursor, student_id, course_id):
     is_assigned = "SELECT * FROM SayCheese.Student_Courses_Assignment WHERE studentID = %s AND courseID = %s"
