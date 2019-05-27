@@ -18,7 +18,7 @@ const mainMenuTemplate = [
             submenu: [
                 {
                     label: 'About'
-                } 
+                }
             ]
     }
 ];

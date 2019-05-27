@@ -17,7 +17,6 @@ function selectStudents() {
         type: 'GET',
         url: 'http://localhost:3000/students',
         success: function(data) {
-            console.log(data);
             $.each(data, function(i, data) {
                 $studentTable.append(
                     '<tr>' +

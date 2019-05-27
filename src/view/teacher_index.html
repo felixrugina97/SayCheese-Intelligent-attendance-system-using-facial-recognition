@@ -17,9 +17,6 @@
                 <li class="page-link" id="dashboard" data-page="dashboard">
                     <a href="#"><i class="fa fa-chart-line"></i><span class="nav-text">Dashboard</span></a>
                 </li>
-                <li class="page-link" data-page="make-attendance">
-                    <a href="#"><i class="fa fa-calendar-alt"></i><span class="nav-text">Make Attendance</span></a>
-                </li>
                 <li class="page-link" data-page="manage-courses">
                     <a href="#" class="manage-courses"><i class="fa fa-chalkboard-teacher"></i><span class="nav-text">Manage Courses</span></a>
                 </li>
@@ -38,8 +35,14 @@
                 <div class="excel-raport">
                     <input type="button" id="excel-raport-button" value="Excel raport">
                 </div>
+                <div class="start-attendance">
+                    <input type="button" id="start-attendance-button" value="Start attendance">
+                </div>
+                <div class="train-data">
+                    <input type="button" id="train-data-button" value="Train data">
+                </div>
                 <div class="search-student">
-                    <input type="text" id="search-students" onkeyup="searchStudents()" placeholder="Search course by name" title="Type in a name">
+                    <input type="text" id="search-students" onkeyup="searchStudents()" placeholder="Search student by name" title="Type in a name">
                     <button type="submit" class="search-students-button"><i class="fas fa-search"></i></button>
                 </div>
                 <div class="student-attendance">
@@ -52,89 +55,27 @@
                                 <th>Group</th>
                                 <th>Subgroup</th>
                                 <th>Course</th>
-                                <th>Week01</th>
-                                <th>Week02</th>
-                                <th>Week03</th>
-                                <th>Week04</th>
-                                <th>Week05</th>
-                                <th>Week06</th>
-                                <th>Week07</th>
-                                <th>Week08</th>
-                                <th>Week09</th>
-                                <th>Week10</th>
-                                <th>Week11</th>
-                                <th>Week12</th>
-                                <th>Week13</th>
-                                <th>Week14</th>
+                                <th>Type</th>
+                                <th>W01</th>
+                                <th>W02</th>
+                                <th>W03</th>
+                                <th>W04</th>
+                                <th>W05</th>
+                                <th>W06</th>
+                                <th>W07</th>
+                                <th>W08</th>
+                                <th>W09</th>
+                                <th>W10</th>
+                                <th>W11</th>
+                                <th>W12</th>
+                                <th>W13</th>
+                                <th>W14</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </section>
-        <section class="page make-attendance-page">
-            <div>
-                <h1>Make Attendance</h1>
-                <div class="make-attendance-form">
-                    <form method="POST" id="start-attendance-form">
-                        <div class="popup">
-                            <span class="popup-text" id="attendance-course"></span>
-                        </div>
-                        <div class="select-box">
-                            <p>Select course:</p>
-                            <select id="select-course-for-attendance" name="Course"></select>
-                        </div>
-                        <div class="popup">
-                            <span class="popup-text" id="attendance-week"></span>
-                        </div>
-                        <div class="select-box">
-                            <p>Select week:</p>
-                            <select id="select-week-for-attendance" name="Week">
-                                <option disabled selected value>Select week</option>
-                                <option>01</option>
-                                <option>02</option>
-                                <option>03</option>
-                                <option>04</option>
-                                <option>05</option>
-                                <option>06</option>
-                                <option>07</option>
-                                <option>08</option>
-                                <option>09</option>
-                                <option>10</option>
-                                <option>11</option>
-                                <option>12</option>
-                                <option>13</option>
-                                <option>14</option>
-                            </select>
-                        </div>
-                        <div class="popup">
-                            <span class="popup-text" id="attendance-hour"></span>
-                        </div>
-                        <div class="select-box">
-                            <p>Select hour:</p>
-                            <select id="select-hour-for-attendance" name="Hour">
-                                <option disabled selected value>Select hour</option>
-                                <option>08:00</option>
-                                <option>09:40</option>
-                                <option>11:20</option>
-                                <option>13:00</option>
-                                <option>14:40</option>
-                                <option>16:20</option>
-                                <option>18:00</option>
-                                <option>19:40</option>
-                            </select>
-                            <p></p>
-                        </div>
-                        <div class="start-attendance">
-                            <input type="button" id="start-attendance-button" value="Create course">
-                        </div>
-                    </form>
-                    <div class="train-data">
-                        <input type="button" id="train-data-button" value="Train data">
-                    </div>
                 </div>
             </div>
         </section>
@@ -166,6 +107,75 @@
                 </div>
             </div>
         </section>
+        <div class="start-attendance-modal">
+            <div class="start-attendance-modal-content">
+                <div class="start-attendance-modal-header">
+                    <div class="x-button"><span>&times;</span></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="start-attendance-modal-body">
+                        <h2>Start attendance</h2>
+                        <div class="make-attendance-form">
+                        <form method="POST" id="start-attendance-form">
+                            <div class="popup">
+                                <span class="popup-text" id="attendance-course"></span>
+                            </div>
+                            <div class="select-box">
+                                <p>Select course:</p>
+                                <select id="select-course-for-attendance" name="Course"></select>
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="attendance-week"></span>
+                            </div>
+                            <div class="select-box">
+                                <p>Select week:</p>
+                                <select id="select-week-for-attendance" name="Week">
+                                    <option disabled selected value>Select week</option>
+                                    <option>01</option>
+                                    <option>02</option>
+                                    <option>03</option>
+                                    <option>04</option>
+                                    <option>05</option>
+                                    <option>06</option>
+                                    <option>07</option>
+                                    <option>08</option>
+                                    <option>09</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                </select>
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="attendance-hour"></span>
+                            </div>
+                            <div class="select-box">
+                                <p>Select hour:</p>
+                                <select id="select-hour-for-attendance" name="Hour">
+                                    <option disabled selected value>Select hour</option>
+                                    <option>08:00</option>
+                                    <option>09:40</option>
+                                    <option>11:20</option>
+                                    <option>13:00</option>
+                                    <option>14:40</option>
+                                    <option>16:20</option>
+                                    <option>18:00</option>
+                                    <option>19:40</option>
+                                </select>
+                                <p></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div style="clear:both;"></div>
+                <div class="start-attendance-modal-footer">
+                    <a href="#" class="start-attendance-modal-button confirm">Start attendance</a>
+                    <a href="#" class="start-attendance-modal-button cancel">Cancel</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
         <div class="add-course-modal">
             <div class="add-course-modal-content">
                 <div class="add-course-modal-header">
@@ -173,7 +183,7 @@
                     <div style="clear:both;"></div>
                 </div>
                 <div class="add-course-modal-body">
-                        <h1>Create course</h1>
+                        <h2>Create course</h2>
                         <form>
                             <div class="popup">
                                 <span class="popup-text" id="name-popup"></span>
@@ -220,7 +230,7 @@
                         </ul>
                     </div>
                     <div class="edit-course-page header-view-courses-page">
-                        <h1 id="#edit-course-modal-course-name"></h1>
+                        <h2 id="#edit-course-modal-course-name"></h2>
                         <div class="search-assigned">
                             <input type="text" id="search-assigned" onkeyup="searchAssigned()" placeholder="Search by study year" title="Type in a name">
                             <button type="submit" class="search-button-assigned"><i class="fas fa-search"></i></button>
@@ -248,7 +258,7 @@
                         </div>
                     </div>
                     <div class="edit-course-page header-assign-courses-page">
-                        <h1>Assign students</h1>
+                        <h2>Assign students</h2>
                         <form method="POST" id="edit-attendance-form">
                             <div class="popup">
                                 <span class="popup-text" id="assign-specialization"></span>
@@ -257,7 +267,7 @@
                                 <p>Select specialization:</p>
                                 <select id="select-specialization-for-assigment" name="Profile">
                                     <option disabled selected value>Select specialization</option>
-                                    <option>Informatica</option>
+                                    <option>Informatica Romana</option>
                                     <option>Informatica Aplicata</option>
                                     <option>Informatica Engleza</option>
                                 </select>
@@ -355,12 +365,29 @@
                     <div style="clear:both;"></div>
                 </div>
                 <div class="confirm-assign-student-modal-body">
-                        <p id="confirm-assign-student-text"></p>
+                    <p id="confirm-assign-student-text"></p>
                 </div>
                 <div style="clear:both;"></div>
                 <div class="confirm-assign-student-modal-footer">
                     <a href="#" class="confirm-assign-student-modal-button confirm">Confirm</a>
                     <a href="#" class="confirm-assign-student-modal-button cancel">Cancel</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="confirm-start-train-modal">
+            <div class="confirm-start-train-modal-content">
+                <div class="confirm-start-train-modal-header">
+                    <div class="x-button"><span>&times;</span></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="confirm-start-train-modal-body">
+                    <p id="confirm-start-train-text"></p>
+                </div>
+                <div style="clear:both;"></div>
+                <div class="confirm-start-train-modal-footer">
+                    <a href="#" class="confirm-start-train-modal-button confirm">Confirm</a>
+                    <a href="#" class="confirm-start-train-modal-button cancel">Cancel</a>
                     <div style="clear:both;"></div>
                 </div>
             </div>
@@ -372,7 +399,7 @@
                     <div style="clear:both;"></div>
                 </div>
                 <div class="exit-modal-body">
-                        <p>Are you sure you want to exit?</p>
+                    <p>Are you sure you want to exit?</p>
                 </div>
                 <div style="clear:both;"></div>
                 <div class="exit-modal-footer">
@@ -382,12 +409,47 @@
                 </div>
             </div>
         </div>
+        <div id="add-course-snackbar">
+            <div style="margin-right: 20px"><i class="fas fa-check-circle"></i></div>
+            <div>Course created with success</div>
+        </div>
+        <div id="add-error-course-snackbar">
+            <div style="margin-right: 20px"><i class="fas fa-times-circle"></i></div>
+            <div>Failed to create course</div>
+        </div>
+        <div id="delete-course-snackbar">
+            <div style="margin-right: 20px"><i class="fas fa-check-circle"></i></div>
+            <div>Course deleted with success</div>
+        </div>
+        <div id="assign-students-snackbar">
+            <div style="margin-right: 20px"><i class="fas fa-check-circle"></i></div>
+            <div>Students assigned with success</div>
+        </div>
+        <div id="attendance-started-snackbar">
+            <div style="margin-right: 20px"><i class="fas fa-bell"></i></div>
+            <div>Attendance started</div>
+        </div>
+        <div id="attendance-snackbar">
+            <div style="margin-right: 20px"><i class="fas fa-check-circle"></i></div>
+            <div>Attendance finished with success</div>
+        </div>
+        <div id="training-started-snackbar">
+            <div style="margin-right: 20px"><i class="fas fa-bell"></i></div>
+            <div>Training data started</div>
+        </div>
+        <div id="training-data-snackbar">
+            <div style="margin-right: 20px"><i class="fas fa-check-circle"></i></div>
+            <div>Training data finished with success</div>
+        </div>
+        <div id="delete-assigned-students-snackbar">
+            <div style="margin-right: 20px"><i class="fas fa-check-circle"></i></div>
+            <div>Assigned students deleted with success</div>
+        </div>
     </main>
     <script type="text/javascript" src="../js/login.js"></script>
     <script type="text/javascript" src="../js/title_bar_handler.js"></script>
     <script type="text/javascript" src="../js/teacher_index.js"></script>
     <script type="text/javascript" src="../js/teacher_dashboard.js"></script>
     <script type="text/javascript" src="../js/teacher_manage_courses.js"></script>
-    <script type="text/javascript" src="../js/teacher_make_attendance.js"></script>
 </body>
 </html>

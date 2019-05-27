@@ -1,5 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var electron = require('electron');
+var dialog = electron.dialog;
 
 var connection = require('../../config/connection');
 var logger = require('../../config/logger').Logger;
@@ -10,6 +12,10 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
+
+dialog.showErrorBox = function(title, content) {
+    logger.error(`${title}\n${content}`, fileName + " {ELECTRON ERROR}");
+};
 
 var teacherID;
 
@@ -27,7 +33,7 @@ app.get('/getStudents', function(req, res){
 
 getStudents = function() {
     let sqlSelectStudentsAndAttendance = 'SELECT Student.firstName, Student.lastName, Student.studyYear, Student.group, Student.subgroup, ' +
-    'Student.specialization, Course.courseName, Attendance.week01, Attendance.week02, Attendance.week03, ' +
+    'Student.specialization, Course.courseName, Course.courseType, Attendance.week01, Attendance.week02, Attendance.week03, ' +
     'Attendance.week04, Attendance.week05, Attendance.week06, Attendance.week07, Attendance.week08, Attendance.week09, '+
     'Attendance.week10, Attendance.week11, Attendance.week12, Attendance.week13, Attendance.week14 '+
     'FROM Student_Courses_Assignment ' +
@@ -45,7 +51,7 @@ getStudents = function() {
             }
             else {
                 reject(err);
-                logger.error("Failed to select students and attendance" + " Error is: " + err, fileName);
+                logger.error("Failed to select students and attendance. Error is: " + err, fileName);
             }
         })
     });
@@ -58,7 +64,7 @@ app.get('/course', function(req, res){
 });
 
 getCourses = function() {
-    let sqlSelectCourses = 'SELECT * FROM Course WHERE teacherID = ? ORDER BY ID, courseName';
+    let sqlSelectCourses = 'SELECT * FROM Course WHERE teacherID = ? ORDER BY courseName';
     return new Promise(function (resolve, reject){
         connection.query(sqlSelectCourses, [teacherID], function(err, result, fields) {
             if (!err) {
@@ -111,10 +117,9 @@ app.post('/createCourse', (req, res) => {
     courseType = req.body.courseType;
     let sql = 'INSERT INTO Course (ID, teacherID, courseName, courseType) VALUES (?, ?, ?, ?)';
     connection.query(sql, [courseID, teacherID, courseName, courseType], function(err, result) {
-        if (err)
-        {
-            logger.error("Failed to insert course." + " Error is: " + err);
-            throw err;
+        if (err) {
+            logger.error("Failed to insert course." + " Error is: " + err, fileName);
+            res.status(500).send({error: true});
         }
         res.json({ok: true});
         logger.debug("Course inserted with success in database", fileName);
@@ -169,7 +174,6 @@ app.post('/assignStudentsToCourse', (req, res) => {
             connection.query(sqlAssignStudentsToCourse, [values, values], function(err, result) {
                 if (err) {
                     logger.error("Failed to assign students to course" + " Error is: " + err);
-                    throw err;
                 }
                 res.json({ok: true});
                 logger.debug("Students assigned with success to course", fileName);
@@ -192,13 +196,13 @@ app.post('/deleteAssignedCourse', (req, res) => {
     let sqlAssignedDeleteCourseAndAttendance =  'START TRANSACTION;' +
     'DELETE Student_Courses_Assignment FROM Student_Courses_Assignment ' +
     'JOIN Student ON Student_Courses_Assignment.studentID = Student.ID ' +
-    'JOIN Course ON Student_Courses_Assignment.courseID = Course.ID ' +
+    'JOIN Course ON Student_Courses_Assignment.courseID = ? ' +
     'WHERE Student.profile = ? AND Student.specialization = ? AND Student.studyYear = ? ' +
     'AND Student.group = ? AND Student.subgroup = ?;' +
     'DELETE FROM Attendance WHERE Attendance.courseID = ?;' +
     'COMMIT;'
 
-    connection.query(sqlAssignedDeleteCourseAndAttendance, [profile, specialization, studyYear, group, subgroup, courseID], function(err, result) {
+    connection.query(sqlAssignedDeleteCourseAndAttendance, [courseID, profile, specialization, studyYear, group, subgroup, courseID], function(err, result) {
         if (err) {
             logger.error("Failed to delete assigned course and attendances" + " Error is: " + err);
             throw err;

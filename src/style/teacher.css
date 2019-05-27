@@ -50,6 +50,10 @@ body {
     display: none;
 }
 
+.page.dashboard-page h1{
+    padding-bottom: 40px;
+}
+
 /* [DROPDOWN] */
 select {
     --radius: 0;
@@ -126,7 +130,7 @@ select:active {
 #student-attendance-table {
     border-collapse: collapse;
     width: 100%;
-    font-size: 10px;
+    font-size: 12px;
     margin-left: auto;
     margin-right: auto;
     text-align: left;
@@ -152,7 +156,7 @@ select:active {
 
 #student-attendance-table tr {
     color: #F5F5F5;
-    font-family: 'Roboto-Regular';
+    font-family: 'Roboto-Light';
 }
 
 #student-attendance-table tr:hover {
@@ -182,6 +186,7 @@ select:active {
 #student-attendance-table tr td:last-child,
 #student-attendance-table tr th:last-child {
     border-right: 0;
+    text-align: center;
 }
 /* END [STUDENT ATTENDACE TABLE] */
 
@@ -204,6 +209,58 @@ select:active {
 }
 
 .excel-raport {
+    position: relative;
+    display: flex;
+    float: right;
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
+
+#start-attendance-button {
+    border: none;
+    outline: none;
+    height: 36px;
+    font-size: 14px;
+    font-family: 'Roboto-Medium';
+    color: #F5F5F5;
+    background-color: #424242;
+    border-radius: 5px;
+    width: 150px;
+}
+
+#start-attendance-button:hover {
+    color: #424242;
+    background-color: #F5F5F5;
+    cursor: pointer;
+}
+
+.start-attendance {
+    position: relative;
+    display: flex;
+    float: right;
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
+
+#train-data-button {
+    border: none;
+    outline: none;
+    height: 36px;
+    font-size: 14px;
+    font-family: 'Roboto-Medium';
+    color: #F5F5F5;
+    background-color: #424242;
+    border-radius: 5px;
+    width: 150px;
+}
+
+#train-data-button:hover {
+    color: #424242;
+    background-color: #F5F5F5;
+    cursor: pointer;
+}
+
+.train-data {
     position: relative;
     display: flex;
     float: right;
@@ -933,6 +990,158 @@ select:active {
 }
 /* END [CONFIRM ASSIGN STUDENT MODAL]*/
 
+/* [CONFIRM START TRAINING DATA MODAL]*/
+.confirm-start-train-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+    font-family: 'Roboto-Medium';
+    color: #F5F5F5;
+}
+
+.confirm-start-train-modal a {
+    text-decoration: none;
+}
+
+.confirm-start-train-modal-content {
+    margin: 25% auto;
+    width: 250px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2),
+        0 7px 20px 0 rgba(0, 0, 0, 0.15);
+    animation-name: open-modal;
+    animation-duration: 0.3s;
+}
+
+.confirm-start-train-modal-header {
+    background: #212121;
+    padding: 0.2px;
+    color: white;
+}
+
+.confirm-start-train-modal-header > div.x-button {
+    float: right;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.confirm-start-train-modal-header > div.x-button:hover {
+    color: #E74C3C;
+    cursor: pointer;
+}
+
+.confirm-start-train-modal-body {
+    height: 100%;
+    background-color: #424242;
+    padding: 10px 20px;
+}
+
+.confirm-start-train-modal-footer {
+    width: 100%;
+}
+
+.confirm-start-train-modal-button.confirm, .confirm-start-train-modal-button.cancel {
+    float: left;
+    width: 50%;
+    height: 30px;
+    text-align: center;
+    outline: none;
+    text-align: center;
+    line-height: 30px;
+    color: #F5F5F5;
+    background-color: #212121;
+}
+
+.confirm-start-train-modal-button.confirm:hover {
+    background-color: #27AE60;
+}
+
+.confirm-start-train-modal-button.cancel:hover {
+    background-color: #E74C3C;
+}
+/* END [CONFIRM START TRAINING DATA STUDENT MODAL]*/
+
+/* [START ATTENDANCE STUDENT MODAL]*/
+.start-attendance-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+    font-family: 'Roboto-Medium';
+    color: #F5F5F5;
+}
+
+.start-attendance-modal a {
+    text-decoration: none;
+}
+
+.start-attendance-modal-content {
+    margin: 25% auto;
+    width: 300px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2),
+        0 7px 20px 0 rgba(0, 0, 0, 0.15);
+    animation-name: open-modal;
+    animation-duration: 0.3s;
+}
+
+.start-attendance-modal-header {
+    background: #212121;
+    padding: 0.2px;
+    color: white;
+}
+
+.start-attendance-modal-header > div.x-button {
+    float: right;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.start-attendance-modal-header > div.x-button:hover {
+    color: #E74C3C;
+    cursor: pointer;
+}
+
+.start-attendance-modal-body {
+    height: 100%;
+    background-color: #424242;
+    padding: 10px 20px;
+}
+
+.start-attendance-modal-footer {
+    width: 100%;
+}
+
+.start-attendance-modal-button.confirm, .start-attendance-modal-button.cancel {
+    float: left;
+    width: 50%;
+    height: 30px;
+    text-align: center;
+    outline: none;
+    text-align: center;
+    line-height: 30px;
+    color: #F5F5F5;
+    background-color: #212121;
+}
+
+.start-attendance-modal-button.confirm:hover {
+    background-color: #27AE60;
+}
+
+.start-attendance-modal-button.cancel:hover {
+    background-color: #E74C3C;
+}
+/* END [START ATTENDANCE STUDENT MODAL]*/
+
 /* [EXIT MODAL]*/
 .exit-modal {
     display: none;
@@ -1008,7 +1217,6 @@ select:active {
     background-color: #E74C3C;
 }
 /* END [EXIT MODAL]*/
-
 
 .search {
     width: 150px;
@@ -1092,7 +1300,7 @@ select:active {
 }
 
 .search-student {
-    width: 150px;
+    width: 190px;
     position: relative;
     display: flex;
     float: left;
@@ -1101,7 +1309,7 @@ select:active {
 }
 
 #search-students {
-    width: 150px;
+    width: 190px;
     border: 3px solid #333;
     border-right: none;
     padding: 5px;
@@ -1109,4 +1317,265 @@ select:active {
     border-radius: 5px 0 0 5px;
     outline: none;
     color: #333;
+}
+
+#add-course-snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #27AE60;
+    color: #F5F5F5;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto-Light';
+}
+
+#add-course-snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#delete-course-snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #27AE60;
+    color: #F5F5F5;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto-Light';
+}
+
+#delete-course-snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#delete-assigned-students-snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #27AE60;
+    color: #F5F5F5;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto-Light';
+}
+
+#delete-assigned-students-snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#assign-students-snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #27AE60;
+    color: #F5F5F5;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto-Light';
+}
+
+#assign-students-snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#attendance-started-snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #2c82c9;
+    color: #F5F5F5;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto-Light';
+}
+
+#attendance-started-snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#training-started-snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #2c82c9;
+    color: #F5F5F5;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto-Light';
+}
+
+#training-started-snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#add-error-course-snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #E74C3C;
+    color: #F5F5F5;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto-Light';
+}
+
+#add-error-course-snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#training-data-snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #27AE60;
+    color: #F5F5F5;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto-Light';
+}
+
+#attendance-snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#attendance-snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #27AE60;
+    color: #F5F5F5;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto-Light';
+}
+
+#training-data-snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#train-data-button:disabled
+{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+#start-attendance-button:disabled
+{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
 }

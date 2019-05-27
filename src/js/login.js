@@ -78,6 +78,7 @@ function sendUserID() {
         url: 'http://localhost:3000/userID',
         data: {ID : userID},
         success : function(data) {
+            $('#train-data-button').attr("disabled", "disabled");
             logger.debug("User ID sent with success", fileName);
         },
         error : function(jqXHR, textStatus, err) {
@@ -85,3 +86,11 @@ function sendUserID() {
         }
     });
 }
+
+addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("login-button").click();
+        logger.info("User pressed enter key (13)", fileName);
+    }
+});

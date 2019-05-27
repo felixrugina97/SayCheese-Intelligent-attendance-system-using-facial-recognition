@@ -70,14 +70,15 @@ function sendCourseData(courseName, courseType) {
             courseName : courseName,
             courseType: courseType
         },
-        success : function(data) {
-            $("#courses tbody").empty();
-            selectCourses();
-            logger.debug("Teacher created with success course", fileName);
-        },
         error : function(jqXHR, textStatus, err) {
-            logger.error("Failed to create course. Text status: " + textStatus + " Error is: " + err);
+            addCourseErrorSnackbar();
+            logger.error("Failed to create course. Text status: " + textStatus + " Error is: " + err, fileName);
         }
+    }).done(function (data) {
+        addCourseSnackbar();
+        $("#courses tbody").empty();
+        selectCourses();
+        logger.debug("Teacher created with success course", fileName);
     });
 }
 
@@ -102,8 +103,8 @@ $('#courses tbody').on('click', '#edit-course', function() {
     assignedCourseID = currentRow.find('td:eq(0)').text();
     var courseName = currentRow.find('td:eq(1)').text();
 
-    $(".edit-course-page.header-view-courses-page h1").empty();
-    $(".edit-course-page.header-view-courses-page h1").append("Course: " + courseName);
+    $(".edit-course-page.header-view-courses-page h2").empty();
+    $(".edit-course-page.header-view-courses-page h2").append("Course: " + courseName);
 
     $("#assigned-course-table tbody").empty();
     sendAssignedCourseID(assignedCourseID);
@@ -123,7 +124,6 @@ $('.header-page-link').click(function() {
 });
 
 function sendAssignedCourseID(assignedCourseID) {
-    console.log(assignedCourseID)
     $.ajax({
         type: 'POST',
         url: 'http://localhost:3000/getAssignedCourseID',
@@ -216,7 +216,8 @@ $('.confirm-assign-student-modal-button.confirm').click(function() {
         },
         success : function(data) {
             $("#assigned-course-table tbody").empty();
-            selectAndFillAssignedCourseTable()
+            selectAndFillAssignedCourseTable();
+            assignStudentsSnackbar();
             logger.debug("Teacher deleted with success assigned course", fileName);
         },
         error : function(jqXHR, textStatus, err) {
@@ -241,6 +242,7 @@ $('.confirm-delete-course-modal-button.confirm').click(function() {
         success : function(data) {
             $("#courses tbody").empty();
             selectCourses();
+            deleteCourseSnackbar();
             logger.debug("Teacher deleted with success course", fileName);
         },
         error : function(jqXHR, textStatus, err) {
@@ -288,11 +290,12 @@ $('.delete-assigned-course-modal-button.confirm').click(function() {
         },
         success : function(data) {
             $("#assigned-course-table tbody").empty();
-            selectAndFillAssignedCourseTable()
-            logger.debug("Teacher deleted with success assigned course", fileName);
+            selectAndFillAssignedCourseTable();
+            deleteAssignedStudentsSnackbar();
+            logger.debug("Teacher deleted with success assigned students", fileName);
         },
         error : function(jqXHR, textStatus, err) {
-            logger.error("Failed to delete assigned course. Text status: " + textStatus + " Error is: " + err);
+            logger.error("Failed to delete assigned students. Text status: " + textStatus + " Error is: " + err);
         }
     });
     $('.delete-assigned-course-modal').hide();
@@ -338,6 +341,46 @@ function searchAssigned() {
             }
         }
     }
+}
+
+function addCourseErrorSnackbar() {
+    let snackbar = document.getElementById("add-error-course-snackbar");
+    snackbar.className = "show";
+    setTimeout(function() {
+        snackbar.className = snackbar.className.replace("show", "");
+    }, 3000);
+}
+
+function addCourseSnackbar() {
+    let snackbar = document.getElementById("add-course-snackbar");
+    snackbar.className = "show";
+    setTimeout(function() {
+        snackbar.className = snackbar.className.replace("show", "");
+    }, 3000);
+}
+
+function deleteCourseSnackbar() {
+    let snackbar = document.getElementById("delete-course-snackbar");
+    snackbar.className = "show";
+    setTimeout(function() {
+        snackbar.className = snackbar.className.replace("show", "");
+    }, 3000);
+}
+
+function assignStudentsSnackbar() {
+    let snackbar = document.getElementById("assign-students-snackbar");
+    snackbar.className = "show";
+    setTimeout(function() {
+        snackbar.className = snackbar.className.replace("show", "");
+    }, 3000);
+}
+
+function deleteAssignedStudentsSnackbar() {
+    let snackbar = document.getElementById("delete-assigned-students-snackbar");
+    snackbar.className = "show";
+    setTimeout(function() {
+        snackbar.className = snackbar.className.replace("show", "");
+    }, 3000);
 }
 
 $('#add-course-button').click(function() {
@@ -386,3 +429,22 @@ $('.confirm-assign-student-modal-header > div.x-button').click(function(){
     logger.info("User left assign students modal view by clicking X button", fileName);
 });
 
+$('.start-attendance-modal-button.cancel').click(function(){
+    $('.start-attendance-modal').hide();
+    logger.info("User left start attendance modal view by clicking cancel button", fileName);
+});
+
+$('.start-attendance-modal-header > div.x-button').click(function(){
+    $('.start-attendance-modal').hide();
+    logger.info("User left start attendance modal view by clicking X button", fileName);
+});
+
+$('.confirm-start-train-modal-button.cancel').click(function(){
+    $('.confirm-start-train-modal').hide();
+    logger.info("User left start training modal view by clicking cancel button", fileName);
+});
+
+$('.confirm-start-train-modal-header > div.x-button').click(function(){
+    $('.confirm-start-train-modal').hide();
+    logger.info("User left start training modal view by clicking X button", fileName);
+});
