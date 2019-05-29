@@ -15,13 +15,10 @@
         <nav class="main-menu">
             <ul>
                 <li class="page-link" data-page="manage-students">
-                    <a href="#"><i class="fa fa-users-cog"></i><span class="nav-text">Manage Students</span></a>
-                </li>
-                <li class="page-link" data-page="add-student">
-                    <a href="#"><i class="fa fa-user-graduate"></i><span class="nav-text">Add Student</span></a>
+                    <a href="#"><i class="fa fa-user-graduate"></i><span class="nav-text">Manage Students</span></a>
                 </li>
                 <li class="page-link" data-page="add-teacher">
-                    <a href="#"><i class="fa fa-chalkboard-teacher"></i><span class="nav-text">Add Teacher</span></a>
+                    <a href="#"><i class="fa fa-chalkboard-teacher"></i><span class="nav-text">Manage Teachers</span></a>
                 </li>
             </ul>
             <ul class="exit">
@@ -35,13 +32,19 @@
         <section class="page manage-students-page">
             <div>
                 <h1>Manage Students</h1>
+                <div class="add-student">
+                    <input type="button" id="add-student-button" value="Add student">
+                </div>
+                <div class="search-students">
+                    <input type="text" id="search-students" onkeyup="searchStudents()" placeholder="Search student by name" title="Type in a name">
+                    <button type="submit" class="search-students-button"><i class="fas fa-search"></i></button>
+                </div>
                 <div class="student-table">
                     <table id="students">
                         <thead>
                             <tr>
                             <th>ID</th>
-                            <th>First name</th>
-                            <th>Last name</th>
+                            <th>Student Name</th>
                             <th>University</th>
                             <th>Profile</th>
                             <th>Specialization</th>
@@ -57,14 +60,31 @@
                 </div>
             </div>
         </section>
-        <section class="page add-student-page">
-            <div>
-                <h1>Add Student</h1>
-            </div>
-        </section>
         <section class="page add-teacher-page">
             <div>
-                <h1>Add Teacher</h1>
+                <h1>Manage Teachers</h1>
+                <div class="add-teacher">
+                    <input type="button" id="add-teacher-button" value="Add teacher">
+                </div>
+                <div class="search-teachers">
+                    <input type="text" id="search-teachers" onkeyup="searchTeacher()" placeholder="Search teacher by name" title="Type in a name">
+                    <button type="submit" class="search-teachers-button"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="teacher-table">
+                    <table id="teachers">
+                        <thead>
+                            <tr>
+                            <th>ID</th>
+                            <th>Teacher Name</th>
+                            <th>University</th>
+                            <th>Email</th>
+                            <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
         <div class="exit-modal">
@@ -84,10 +104,165 @@
                 </div>
             </div>
         </div>
+        <div class="add-student-modal">
+            <div class="add-student-modal-content">
+                <div class="add-student-modal-header">
+                    <div class="x-button"><span>&times;</span></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="add-student-modal-body">
+                        <h2>Add student</h2>
+                        <form>
+                            <div class="popup">
+                                <span class="popup-text" id="first-name-popup"></span>
+                            </div>
+                            <div class="input-box">
+                                <p>Enter student first name:</p>
+                                <input type="text" id="student-first-name" placeholder="First name">
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="last-name-popup"></span>
+                            </div>
+                            <div class="input-box">
+                                <p>Enter student last name:</p>
+                                <input type="text" id="student-last-name" placeholder="Last name">
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="university-popup"></span>
+                            </div>
+                            <p>Select university:</p>
+                            <div class="select-box">
+                                <select id="select-university" name="University">
+                                    <option disabled selected value>Select university</option>
+                                    <option value="0">Matematica-Informatica</option>
+                                </select>
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="profile-popup"></span>
+                            </div>
+                            <p>Select profile:</p>
+                            <div class="select-box">
+                                <select id="select-profile" name="Profile">
+                                    <option disabled selected value>Select profile</option>
+                                    <option value="0">Informatica</option>
+                                </select>
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="specialization-popup"></span>
+                            </div>
+                            <p>Select specialization:</p>
+                            <div class="select-box">
+                                <select id="select-specialization" name="Specialization">
+                                    <option disabled selected value>Select specialization</option>
+                                    <option value="0">Informatica Aplicata</option>
+                                    <option value="1">Informatica Engleza</option>
+                                    <option value="2">Informatica Romana</option>
+                                </select>
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="study-year-popup"></span>
+                            </div>
+                            <div class="select-box">
+                                <p>Select study year:</p>
+                                <select id="select-study-year" name="Study Year">
+                                    <option disabled selected value>Select study year</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="group-popup"></span>
+                            </div>
+                            <div class="select-box">
+                                <p>Select group:</p>
+                                <select id="select-group" name="Group">
+                                    <option disabled selected value>Select group</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                </select>
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="subgroup-popup"></span>
+                            </div>
+                            <div class="select-box">
+                                <p>Select subgroup:</p>
+                                <select id="select-subgroup" name="Subgroup">
+                                    <option disabled selected value>Select subgroup</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                </select>
+                            </div>
+                            <p></p>
+                        </form>
+                </div>
+                <div style="clear:both;"></div>
+                <div class="add-student-modal-footer">
+                    <a href="#" class="add-student-modal-button confirm">Create</a>
+                    <a href="#" class="add-student-modal-button cancel">Cancel</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="confirm-delete-student-modal">
+            <div class="confirm-delete-student-modal-content">
+                <div class="confirm-delete-student-modal-header">
+                    <div class="x-button"><span>&times;</span></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="confirm-delete-student-modal-body">
+                        <p id="confirm-delete-student-text"></p>
+                </div>
+                <div style="clear:both;"></div>
+                <div class="confirm-delete-student-modal-footer">
+                    <a href="#" class="confirm-delete-student-modal-button confirm">Confirm</a>
+                    <a href="#" class="confirm-delete-student-modal-button cancel">Cancel</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="confirm-delete-teacher-modal">
+            <div class="confirm-delete-teacher-modal-content">
+                <div class="confirm-delete-teacher-modal-header">
+                    <div class="x-button"><span>&times;</span></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="confirm-delete-teacher-modal-body">
+                        <p id="confirm-delete-teacher-text"></p>
+                </div>
+                <div style="clear:both;"></div>
+                <div class="confirm-delete-teacher-modal-footer">
+                    <a href="#" class="confirm-delete-teacher-modal-button confirm">Confirm</a>
+                    <a href="#" class="confirm-delete-teacher-modal-button cancel">Cancel</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
+        <div id="add-student-snackbar">
+            <div style="margin-right: 20px"><i class="fas fa-check-circle"></i></div>
+            <div>Student added with success</div>
+        </div>
+        <div id="delete-student-snackbar">
+            <div style="margin-right: 20px"><i class="fas fa-check-circle"></i></div>
+            <div>Student deleted with success</div>
+        </div>
+        <div id="delete-teacher-snackbar">
+            <div style="margin-right: 20px"><i class="fas fa-check-circle"></i></div>
+            <div>Teacher deleted with success</div>
+        </div>
     </main>
     <script type="text/javascript" src="../js/title_bar_handler.js"></script>
     <script type="text/javascript" src="../js/login.js"></script>
     <script type="text/javascript" src="../js/admin_index.js"></script>
     <script type="text/javascript" src="../js/admin_manage_students.js"></script>
+    <script type="text/javascript" src="../js/admin_manage_teachers.js"></script>
 </body>
 </html>

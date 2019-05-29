@@ -86,16 +86,36 @@ var deleteCourseID = null;
 $('#courses tbody').on('click', '#delete-course', function() {
     var currentRow = $(this).closest('tr');
     deleteCourseID = currentRow.find('td:eq(0)').text();
-    var deletCourseName = currentRow.find('td:eq(1)').text();
+    var deleteCourseName = currentRow.find('td:eq(1)').text();
 
     $('#confirm-delete-course-text').empty();
     $('#confirm-delete-course-text').append("Are you sure you want to " +
         "<span style=\"color:#E74C3C\"><strong>DELETE</strong></span> <strong>" +
-        deletCourseName + "</strong> course?" +
+        deleteCourseName + "</strong> course?" +
         "<br><br><span style=\"color:#f1c40f\"><strong>WARNING</strong></span><br> This also will remove attendances!");
 
     $('.confirm-delete-course-modal').show();
-})
+});
+
+$('.confirm-delete-course-modal-button.confirm').click(function() {
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:3000/deleteCourse',
+        data: {
+            courseID : deleteCourseID
+        },
+        success : function(data) {
+            $("#courses tbody").empty();
+            selectCourses();
+            deleteCourseSnackbar();
+            logger.debug("Teacher deleted with success course", fileName);
+        },
+        error : function(jqXHR, textStatus, err) {
+            logger.error("Failed to delete course. Text status: " + textStatus + " Error is: " + err);
+        }
+    });
+    $('.confirm-delete-course-modal').hide();
+});
 
 var assignedCourseID = null
 $('#courses tbody').on('click', '#edit-course', function() {
@@ -230,26 +250,6 @@ $('.confirm-assign-student-modal-button.confirm').click(function() {
     $("#select-group-for-assigment").prop('selectedIndex', 0);
     $("#select-subgroup-for-assigment").prop('selectedIndex', 0);
     logger.debug("User sent assign data with success to the server", fileName);
-});
-
-$('.confirm-delete-course-modal-button.confirm').click(function() {
-    $.ajax({
-        type: 'POST',
-        url: 'http://localhost:3000/deleteCourse',
-        data: {
-            courseID : deleteCourseID
-        },
-        success : function(data) {
-            $("#courses tbody").empty();
-            selectCourses();
-            deleteCourseSnackbar();
-            logger.debug("Teacher deleted with success course", fileName);
-        },
-        error : function(jqXHR, textStatus, err) {
-            logger.error("Failed to delete course. Text status: " + textStatus + " Error is: " + err);
-        }
-    });
-    $('.confirm-delete-course-modal').hide();
 });
 
 var deleteAssignedCourseProfile = null;

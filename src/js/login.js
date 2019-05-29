@@ -61,22 +61,23 @@ function checkUserType(currentUserType, email) {
         main.openWindow('admin_index');
         window.hide();
         logger.debug("Login window hidden with success", fileName);
-        sendUserID();
     }
     else if (currentUserType == userType.TEACHER) {
         logger.info("User " + email + " logged in as Teacher with success", fileName);
         main.openWindow('teacher_index');
         window.hide();
         logger.debug("Login window hidden with success", fileName);
-        sendUserID();
+        sendTeacherID();
     }
 }
 
-function sendUserID() {
+function sendTeacherID() {
     $.ajax({
         type: 'POST',
         url: 'http://localhost:3000/userID',
-        data: {ID : userID},
+        data: {
+            ID : userID
+        },
         success : function(data) {
             $('#train-data-button').attr("disabled", "disabled");
             logger.debug("User ID sent with success", fileName);

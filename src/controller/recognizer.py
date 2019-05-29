@@ -112,17 +112,23 @@ def start_attendance(camera, cursor, database, known_faces, known_face_names):
                 if is_assigned_to_course(cursor, studentProfile[0], course_id):
                     cv2.rectangle(frame, (left, top), (right, bottom), (255, 0, 0), 2)
 
+                    cv2.rectangle(frame, (left, bottom + 75), (right, bottom), (255, 0, 0), cv2.FILLED)
                     font = cv2.FONT_HERSHEY_DUPLEX
-                    cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+                    cv2.putText(frame, name, (left + 6, bottom + 28), font, 1.0, (255, 255, 255), 1)
+                    cv2.putText(frame, "Y: " + str(studentProfile[6]) + " GR: " + str(studentProfile[7]) + " SGR: " +
+                        str(studentProfile[8]), (left + 6, bottom + 65), font, 1.0, (255, 255, 255), 1)
                     attendance.append([course_id, studentProfile[0], datetime.today().strftime('%Y-%m-%d'), week, hour])
                 else:
                     cv2.rectangle(frame, (left, top), (right, bottom), (255, 0, 0), 2)
 
+                    cv2.rectangle(frame, (left, bottom + 75), (right, bottom), (255, 0, 0), cv2.FILLED)
                     font = cv2.FONT_HERSHEY_DUPLEX
-                    cv2.putText(frame, name + " NOT ASSIGNED", (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+                    cv2.putText(frame, name, (left + 6, bottom + 28), font, 1.0, (255, 255, 255), 1)
+                    cv2.putText(frame, "NOT ASSIGNED", (left + 6, bottom + 65), font, 1.0, (255, 255, 255), 1)
             else:
                 cv2.rectangle(frame, (left, top), (right, bottom), (255, 0, 0), 2)
 
+                cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (255, 0, 0), cv2.FILLED)
                 font = cv2.FONT_HERSHEY_DUPLEX
                 cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
 

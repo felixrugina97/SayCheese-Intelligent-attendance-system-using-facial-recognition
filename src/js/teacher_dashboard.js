@@ -8,7 +8,7 @@ var fileName = 'src::js::teacher_dashboard.js';
 
 $(function() {
     selectStudents();
-})
+});
 
 $('#dashboard').click(function() {
     selectStudents();

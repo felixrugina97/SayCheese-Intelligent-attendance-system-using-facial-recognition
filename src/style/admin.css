@@ -46,10 +46,113 @@ body {
     display: none;
 }
 
-/* [COURSE TABLE] */
+/* [TEACHER TABLE] */
+.teacher-table {
+    width: calc(100% - 40px);
+    height: 550px;
+    overflow-y: auto;
+    float: left;
+    margin-left: 20px;
+}
+
+/* scrollbar */
+.teacher-table::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+.teacher-table::-webkit-scrollbar-track {
+    background-color: #BDBDBD;
+}
+.teacher-table::-webkit-scrollbar-thumb {
+    background-color: #757575;
+}
+
+#teachers {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    background-color: #363636;
+}
+
+#teachers td, #teachers th {
+    padding: 10px;
+}
+
+#teachers th {
+    position: sticky;
+    top: 0;
+    background-color: #363636;
+    font-family: 'Roboto-Light';
+}
+
+#teachers tbody {
+    width: 100%;
+    overflow: auto;
+    height: 100px;
+}
+
+#teachers tr {
+    color: #F5F5F5;
+    font-family: 'Roboto-Regular';
+}
+
+#teachers tr:hover {
+    background-color: #2b2b2b;
+}
+
+#teachers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: white;
+    background-color: #2b2b2b;
+}
+
+#teachers td, #courses th {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+#teachers tr:first-child th {
+    border-top: 0;
+}
+#teachers tr:last-child td {
+    border-bottom: 0;
+}
+#teachers tr td:first-child,
+#teachers tr th:first-child {
+    border-left: 0;
+}
+#teachers tr td:last-child,
+#teachers tr th:last-child {
+    border-right: 0;
+}
+
+.teachers-table-controls {
+    color: #F5F5F5;
+    font-size: 16px;
+    text-align: center;
+}
+
+.teachers-table-controls>i.fas.fa-file-upload {
+    padding-right: 5px;
+}
+
+.teachers-table-controls>i.fas.fa-file-upload:hover {
+    color: #27AE60;
+    cursor: pointer;
+}
+
+.teachers-table-controls>i.far.fa-trash-alt:hover {
+    color: #E74C3C;
+    cursor: pointer;
+}
+/* END [STUDENT TABLE] */
+
+/* [STUDENT TABLE] */
 .student-table {
     width: calc(100% - 40px);
-    height: 400px;
+    height: 550px;
     overflow-y: auto;
     float: left;
     margin-left: 20px;
@@ -147,7 +250,319 @@ body {
     color: #E74C3C;
     cursor: pointer;
 }
-/* END [COURSE TABLE] */
+/* END [STUDENT TABLE] */
+
+/* [ADD STUDENT MODAl] */
+.add-student-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    font-family: 'Roboto-Medium';
+    color: #F5F5F5;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    overflow-y: auto;
+}
+
+.add-student-modal a {
+    text-decoration: none;
+}
+
+.add-student-modal-content {
+    margin: 0 auto;
+    width: 500px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2),
+        0 7px 20px 0 rgba(0, 0, 0, 0.15);
+    animation-name: open-modal;
+    animation-duration: 0.3s;
+    position: relative;
+    top: calc(100% - 725px);
+}
+
+.add-student-modal-header {
+    background: #212121;
+    padding: 0.2px;
+    color: white;
+}
+
+.add-student-modal-header > div.x-button {
+    float: right;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.add-student-modal-header > div.x-button:hover {
+    color: #E74C3C;
+    cursor: pointer;
+}
+
+.add-student-modal-body {
+    height: 100%;
+    background-color: #424242;
+    padding: 10px 20px;
+}
+
+.add-student-modal-body input {
+    width: 30%;
+    background: #212121;
+    margin-bottom: 20px;
+}
+
+.add-student-modal-body input[type="text"] {
+    border: none;
+    border-bottom: 2px solid #757575;
+    outline: none;
+    height: 30px;
+    color: #F5F5F5;
+    background: transparent;
+    font-family: 'Roboto-Regular';
+    font-size: 14px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.add-student-modal-body input[type="text"]:focus {
+    border-bottom: 2px solid #F5F5F5;
+}
+
+.add-student-modal-footer {
+    width: 100%;
+}
+
+.add-student-modal-button.confirm, .add-student-modal-button.cancel {
+    float: left;
+    width: 50%;
+    height: 30px;
+    text-align: center;
+    outline: none;
+    text-align: center;
+    line-height: 30px;
+    color: #F5F5F5;
+    background-color: #212121;
+}
+
+.add-student-modal-button.confirm:hover {
+    background-color: #27AE60;
+}
+
+.add-student-modal-button.cancel:hover {
+    background-color: #E74C3C;
+}
+
+.popup {
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.popup .popup-text {
+    visibility: hidden;
+    width: 160px;
+    background-color: #E74C3C;
+    color: #F5F5F5;
+    text-align: center;
+    font-size: 10px;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+    font-family: 'Roboto-Medium';
+}
+
+.popup .popup-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #E74C3C transparent transparent transparent;
+}
+
+.popup .show {
+    visibility: visible;
+    animation: fadeOut 0.5s 1;
+    -webkit-animation: fadeOut 0.5s 1;
+    animation-fill-mode: forwards;
+
+    animation-delay: 1.5s;
+    -webkit-animation-delay: 1.5s;
+    -webkit-animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut{
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+@-webkit-keyframes fadeOut{
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+/* END [ADD STUDENT MODAl] */
+
+/* [DELETE STUDENT MODAL]*/
+.confirm-delete-student-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+    font-family: 'Roboto-Medium';
+    color: #F5F5F5;
+}
+
+.confirm-delete-student-modal a {
+    text-decoration: none;
+}
+
+.confirm-delete-student-modal-content {
+    margin: 25% auto;
+    width: 250px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2),
+        0 7px 20px 0 rgba(0, 0, 0, 0.15);
+    animation-name: open-modal;
+    animation-duration: 0.3s;
+}
+
+.confirm-delete-student-modal-header {
+    background: #212121;
+    padding: 0.2px;
+    color: white;
+}
+
+.confirm-delete-student-modal-header > div.x-button {
+    float: right;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.confirm-delete-student-modal-header > div.x-button:hover {
+    color: #E74C3C;
+    cursor: pointer;
+}
+
+.confirm-delete-student-modal-body {
+    height: 100%;
+    background-color: #424242;
+    padding: 10px 20px;
+}
+
+.confirm-delete-student-modal-footer {
+    width: 100%;
+}
+
+.confirm-delete-student-modal-button.confirm, .confirm-delete-student-modal-button.cancel {
+    float: left;
+    width: 50%;
+    height: 30px;
+    text-align: center;
+    outline: none;
+    text-align: center;
+    line-height: 30px;
+    color: #F5F5F5;
+    background-color: #212121;
+}
+
+.confirm-delete-student-modal-button.confirm:hover {
+    background-color: #27AE60;
+}
+
+.confirm-delete-student-modal-button.cancel:hover {
+    background-color: #E74C3C;
+}
+/* END [DELETE STUDENT MODAL]*/
+
+/* [DELETE TEACHER MODAL]*/
+.confirm-delete-teacher-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+    font-family: 'Roboto-Medium';
+    color: #F5F5F5;
+}
+
+.confirm-delete-teacher-modal a {
+    text-decoration: none;
+}
+
+.confirm-delete-teacher-modal-content {
+    margin: 25% auto;
+    width: 250px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2),
+        0 7px 20px 0 rgba(0, 0, 0, 0.15);
+    animation-name: open-modal;
+    animation-duration: 0.3s;
+}
+
+.confirm-delete-teacher-modal-header {
+    background: #212121;
+    padding: 0.2px;
+    color: white;
+}
+
+.confirm-delete-teacher-modal-header > div.x-button {
+    float: right;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.confirm-delete-teacher-modal-header > div.x-button:hover {
+    color: #E74C3C;
+    cursor: pointer;
+}
+
+.confirm-delete-teacher-modal-body {
+    height: 100%;
+    background-color: #424242;
+    padding: 10px 20px;
+}
+
+.confirm-delete-teacher-modal-footer {
+    width: 100%;
+}
+
+.confirm-delete-teacher-modal-button.confirm, .confirm-delete-teacher-modal-button.cancel {
+    float: left;
+    width: 50%;
+    height: 30px;
+    text-align: center;
+    outline: none;
+    text-align: center;
+    line-height: 30px;
+    color: #F5F5F5;
+    background-color: #212121;
+}
+
+.confirm-delete-teacher-modal-button.confirm:hover {
+    background-color: #27AE60;
+}
+
+.confirm-delete-teacher-modal-button.cancel:hover {
+    background-color: #E74C3C;
+}
+/* END [DELETE TEACHER MODAL]*/
 
 /* [EXIT MODAL]*/
 .exit-modal {
@@ -224,3 +639,264 @@ body {
     background-color: #E74C3C;
 }
 /* END [EXIT MODAL]*/
+
+.search-students-button {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #333;
+    background: #333;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+    pointer-events: none;
+    outline: none;
+}
+
+.search-students {
+    width: 190px;
+    position: relative;
+    display: flex;
+    float: left;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+
+#search-students {
+    width: 190px;
+    border: 3px solid #333;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #333;
+}
+
+.search-teachers-button {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #333;
+    background: #333;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+    pointer-events: none;
+    outline: none;
+}
+
+.search-teachers {
+    width: 190px;
+    position: relative;
+    display: flex;
+    float: left;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+
+#search-teachers {
+    width: 190px;
+    border: 3px solid #333;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #333;
+}
+
+#add-student-button {
+    border: none;
+    outline: none;
+    height: 36px;
+    font-size: 14px;
+    font-family: 'Roboto-Medium';
+    color: #F5F5F5;
+    background-color: #424242;
+    border-radius: 5px;
+    width: 150px;
+}
+
+#add-student-button:hover {
+    color: #424242;
+    background-color: #F5F5F5;
+    cursor: pointer;
+}
+
+.add-student {
+    position: relative;
+    display: flex;
+    float: right;
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
+
+#add-teacher-button {
+    border: none;
+    outline: none;
+    height: 36px;
+    font-size: 14px;
+    font-family: 'Roboto-Medium';
+    color: #F5F5F5;
+    background-color: #424242;
+    border-radius: 5px;
+    width: 150px;
+}
+
+#add-teacher-button:hover {
+    color: #424242;
+    background-color: #F5F5F5;
+    cursor: pointer;
+}
+
+.add-teacher {
+    position: relative;
+    display: flex;
+    float: right;
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
+
+/* [DROPDOWN] */
+select {
+    --radius: 0;
+    --baseFg: #F5F5F5;
+    --baseBg: #424242;
+    --accentFg: #F5F5F5;
+    --accentBg: #212121;
+}
+
+select {
+    font: 400 12px/1.3 sans-serif;
+    -webkit-appearance: none;
+    appearance: none;
+    color: var(--baseFg);
+    line-height: 1;
+    outline: 0;
+    padding: 0.65em 2.5em 0.55em 0.75em;
+    border-radius: var(--radius);
+    background-color: var(--baseBg);
+    background-image: linear-gradient(var(--baseFg), var(--baseFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),
+    linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;
+    background-position: right 20px center, right bottom, right bottom, right bottom;
+    text-decoration: none;
+}
+
+select:hover {
+    background-image: linear-gradient(var(--accentFg), var(--accentFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
+}
+
+select:active {
+    background-image: linear-gradient(var(--accentFg), var(--accentFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
+    color: var(--accentBg);
+    background-color: var(--accentFg);
+}
+/* [END DROPDOWN] */
+
+#add-student-snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #27AE60;
+    color: #F5F5F5;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto-Light';
+}
+
+#add-student-snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#delete-student-snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #27AE60;
+    color: #F5F5F5;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto-Light';
+}
+
+#delete-student-snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#delete-teacher-snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #27AE60;
+    color: #F5F5F5;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto-Light';
+}
+
+#delete-teacher-snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
