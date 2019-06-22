@@ -1,7 +1,7 @@
 var $ = jQuery = require('jquery');
-var logger = require('../../config/logger').Logger;
 
 var fileName = 'src::js::teacher_manage_courses.js';
+var logger = require('../../config/logger').Logger;
 
 $(function() {
     selectCourses();
@@ -32,7 +32,7 @@ function selectCourses() {
                             '<i class="far fa-trash-alt" id="delete-course"></i>' +
                         '</td>' +
                     '<tr>'
-                )
+                );
             });
         }
     });
@@ -72,7 +72,8 @@ function sendCourseData(courseName, courseType) {
         },
         error : function(jqXHR, textStatus, err) {
             addCourseErrorSnackbar();
-            logger.error("Failed to create course. Text status: " + textStatus + " Error is: " + err, fileName);
+            logger.error("Failed to create course. Text status: " + textStatus +
+                " Error is: " + err, fileName);
         }
     }).done(function (data) {
         addCourseSnackbar();
@@ -92,7 +93,8 @@ $('#courses tbody').on('click', '#delete-course', function() {
     $('#confirm-delete-course-text').append("Are you sure you want to " +
         "<span style=\"color:#E74C3C\"><strong>DELETE</strong></span> <strong>" +
         deleteCourseName + "</strong> course?" +
-        "<br><br><span style=\"color:#f1c40f\"><strong>WARNING</strong></span><br> This also will remove attendances!");
+        "<br><br><span style=\"color:#f1c40f\"><strong>WARNING</strong></span><br>" +
+        "This also will remove attendances!");
 
     $('.confirm-delete-course-modal').show();
 });
@@ -152,7 +154,8 @@ function sendAssignedCourseID(assignedCourseID) {
             logger.debug("Course ID to get assigned courses sent with success", fileName);
         },
         error : function(jqXHR, textStatus, err) {
-            logger.error("Failed to send course ID to get assigned courses. Text status: " + textStatus + " Error is: " + err);
+            logger.error("Failed to send course ID to get assigned courses. Text status: " +
+                textStatus + " Error is: " + err);
         }
     });
 }
@@ -175,7 +178,7 @@ function selectAndFillAssignedCourseTable() {
                             '<i class="far fa-trash-alt" id="assigned-delete-course"></i>' +
                         '</td>' +
                     '<tr>'
-                )
+                );
             });
         }
     });
@@ -241,7 +244,8 @@ $('.confirm-assign-student-modal-button.confirm').click(function() {
             logger.debug("Teacher deleted with success assigned course", fileName);
         },
         error : function(jqXHR, textStatus, err) {
-            logger.error("Failed to delete assigned course. Text status: " + textStatus + " Error is: " + err);
+            logger.error("Failed to delete assigned course. Text status: " +
+                textStatus + " Error is: " + err);
         }
     });
     $('.confirm-assign-student-modal').hide();
@@ -271,7 +275,8 @@ $('#assigned-course-table tbody').on('click', '#assigned-delete-course', functio
         deleteAssignedCourseProfile + ", " + deleteAssignedCourseSpecialization + ", Year " +
         deleteAssignedCourseStudyYear + ", Group " + deleteAssignedCourseGroup + ", Subgroup " +
         + deleteAssignedCourseSubgroup + "</strong> from course?" +
-        "<br><br><span style=\"color:#f1c40f\"><strong>WARNING</strong></span><br> This also will remove attendances!");
+        "<br><br><span style=\"color:#f1c40f\"><strong>WARNING</strong></span><br> " +
+        "This also will remove attendances!");
 
     $('.delete-assigned-course-modal').show();
 });
@@ -295,7 +300,8 @@ $('.delete-assigned-course-modal-button.confirm').click(function() {
             logger.debug("Teacher deleted with success assigned students", fileName);
         },
         error : function(jqXHR, textStatus, err) {
-            logger.error("Failed to delete assigned students. Text status: " + textStatus + " Error is: " + err);
+            logger.error("Failed to delete assigned students. Text status: " +
+                textStatus + " Error is: " + err);
         }
     });
     $('.delete-assigned-course-modal').hide();
@@ -346,6 +352,7 @@ function searchAssigned() {
 function addCourseErrorSnackbar() {
     let snackbar = document.getElementById("add-error-course-snackbar");
     snackbar.className = "show";
+
     setTimeout(function() {
         snackbar.className = snackbar.className.replace("show", "");
     }, 3000);
@@ -354,6 +361,7 @@ function addCourseErrorSnackbar() {
 function addCourseSnackbar() {
     let snackbar = document.getElementById("add-course-snackbar");
     snackbar.className = "show";
+
     setTimeout(function() {
         snackbar.className = snackbar.className.replace("show", "");
     }, 3000);
@@ -362,6 +370,7 @@ function addCourseSnackbar() {
 function deleteCourseSnackbar() {
     let snackbar = document.getElementById("delete-course-snackbar");
     snackbar.className = "show";
+
     setTimeout(function() {
         snackbar.className = snackbar.className.replace("show", "");
     }, 3000);
@@ -370,6 +379,7 @@ function deleteCourseSnackbar() {
 function assignStudentsSnackbar() {
     let snackbar = document.getElementById("assign-students-snackbar");
     snackbar.className = "show";
+
     setTimeout(function() {
         snackbar.className = snackbar.className.replace("show", "");
     }, 3000);
@@ -378,6 +388,7 @@ function assignStudentsSnackbar() {
 function deleteAssignedStudentsSnackbar() {
     let snackbar = document.getElementById("delete-assigned-students-snackbar");
     snackbar.className = "show";
+
     setTimeout(function() {
         snackbar.className = snackbar.className.replace("show", "");
     }, 3000);
@@ -429,22 +440,3 @@ $('.confirm-assign-student-modal-header > div.x-button').click(function(){
     logger.info("User left assign students modal view by clicking X button", fileName);
 });
 
-$('.start-attendance-modal-button.cancel').click(function(){
-    $('.start-attendance-modal').hide();
-    logger.info("User left start attendance modal view by clicking cancel button", fileName);
-});
-
-$('.start-attendance-modal-header > div.x-button').click(function(){
-    $('.start-attendance-modal').hide();
-    logger.info("User left start attendance modal view by clicking X button", fileName);
-});
-
-$('.confirm-start-train-modal-button.cancel').click(function(){
-    $('.confirm-start-train-modal').hide();
-    logger.info("User left start training modal view by clicking cancel button", fileName);
-});
-
-$('.confirm-start-train-modal-header > div.x-button').click(function(){
-    $('.confirm-start-train-modal').hide();
-    logger.info("User left start training modal view by clicking X button", fileName);
-});

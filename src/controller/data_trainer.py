@@ -1,13 +1,13 @@
-import pickle
 import cv2
 import face_recognition
 import json
 import mysql.connector
 import numpy as np
 import os
+import pickle
 from datetime import datetime
-from pathlib import Path
 from dotenv import load_dotenv
+from pathlib import Path
 
 env_path = Path('../..') / '.env'
 load_dotenv(dotenv_path=env_path)

@@ -67,6 +67,7 @@ typings/
 data/recognizer
 data/data_set
 students_photos/*
+data/attendance_data.txt
 
 # .vscode
 .vscode

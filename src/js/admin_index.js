@@ -1,6 +1,6 @@
+var $ = require('jquery');
 var remote = require('electron').remote;
 var main = remote.require('./main.js');
-var $ = require('jquery');
 
 var logger = require('../../config/logger').Logger;
 

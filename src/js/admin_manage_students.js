@@ -1,7 +1,8 @@
 var $ = jQuery = require('jquery');
-var logger = require('../../config/logger').Logger;
-var fs = require('fs');
 var {app, dialog} = require('electron').remote;
+var fs = require('fs');
+
+var logger = require('../../config/logger').Logger;
 
 var fileName = 'src::js::admin_manage_courses.js';
 
@@ -43,11 +44,12 @@ $('#students tbody').on('click', '#upload-photo', function() {
     let studentID = currentRow.find('td:eq(0)').text();
 
     const filePath = dialog.showOpenDialog({ properties: ['openFile']})[0];
-    const projectPath = app.getAppPath()
+    const projectPath = app.getAppPath();
 
     fs.copyFile(filePath, projectPath + '/data/data_set/' + studentID + '.jpg', err => {
         if (err)
-            throw err;
+            logger.error("Failed to copy student photo with ID " + studentID +
+                " Error is: " + err, fileName);
     });
 });
 
@@ -57,6 +59,7 @@ $('#add-student-button').on('click', function() {
 
 function searchStudents() {
     var input, filter, table, tr, td, i, txtValue;
+
     input = document.getElementById("search-students");
     filter = input.value.toUpperCase();
     table = document.getElementById("students");
@@ -156,7 +159,8 @@ function sendStudentData(firstName, lastName, university, profile, specializatio
             subgroup: subgroup
         },
         error : function(jqXHR, textStatus, err) {
-            logger.error("Failed to add student. Text status: " + textStatus + " Error is: " + err, fileName);
+            logger.error("Failed to add student. Text status: " + textStatus +
+                " Error is: " + err, fileName);
         }
     }).done(function (data) {
         addStudentSnackbar();
@@ -204,6 +208,7 @@ $('.confirm-delete-student-modal-button.confirm').click(function() {
 function addStudentSnackbar() {
     let snackbar = document.getElementById("add-student-snackbar");
     snackbar.className = "show";
+
     setTimeout(function() {
         snackbar.className = snackbar.className.replace("show", "");
     }, 3000);
@@ -212,6 +217,7 @@ function addStudentSnackbar() {
 function deleteStudentSnackbar() {
     let snackbar = document.getElementById("delete-student-snackbar");
     snackbar.className = "show";
+    
     setTimeout(function() {
         snackbar.className = snackbar.className.replace("show", "");
     }, 3000);

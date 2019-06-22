@@ -1,8 +1,8 @@
 var $ = jQuery = require('jquery');
-var path = require('path');
-var XLSX = require('xlsx');
-var ps = require('python-shell')
 var {dialog} = require('electron').remote;
+var path = require('path');
+var ps = require('python-shell');
+var XLSX = require('xlsx');
 
 var fileName = 'src::js::teacher_dashboard.js';
 
@@ -27,7 +27,7 @@ function selectStudents() {
                     courseType = "Weekly";
                 }
                 else if (data.courseType == 1) {
-                    courseType = "Biweekly"
+                    courseType = "Biweekly";
                 }
 
                 $studentAttendance.append(
@@ -48,7 +48,7 @@ function selectStudents() {
                         '<td>' + data.week13 + '</td>' + '<td>' + data.week14 + '</td>' +
                         '<td>' + '</td>' +
                 '<tr>'
-                )
+                );
             });
 
             let table = document.getElementById("student-attendance-table");
@@ -74,9 +74,10 @@ function selectStudents() {
 }
 
 $('#excel-raport-button').click(function() {
-    var wb = XLSX.utils.table_to_book(document.getElementById('student-attendance-table'), {sheet: 'Sheet JS'});
+    var wb = XLSX.utils.table_to_book(document.getElementById('student-attendance-table'),
+        {sheet: 'Sheet JS'});
 
-    var XTENSION = "xls|xlsx|xlsm|xlsb|xml|csv|txt|dif|sylk|slk|prn|ods|fods|htm|html".split("|")
+    var XTENSION = "xls|xlsx|xlsm|xlsb|xml|csv|txt|dif|sylk|slk|prn|ods|fods|htm|html".split("|");
 
     const filePath = dialog.showSaveDialog({
         title: 'Save file as',
@@ -84,7 +85,7 @@ $('#excel-raport-button').click(function() {
 				name: "Spreadsheets",
 				extensions: XTENSION
 			}]
-    })
+    });
 
 	XLSX.writeFile(wb, filePath);
 });
@@ -98,7 +99,8 @@ function getCoursesDropDown() {
         success: function(data) {
             $dropdown.append('<option disabled selected value>Select course</option>');
             $.each(data, function() {
-                $dropdown.append($("<option />").val(this.ID).text("(" + this.ID + ") " + this.courseName))
+                $dropdown.append($("<option />").val(this.ID).text("(" + this.ID + ") " +
+                    this.courseName));
             });
         }
     });
@@ -264,3 +266,23 @@ function trainingDataFinished() {
         snackbar.className = snackbar.className.replace("show", "");
     }, 3000);
 }
+
+$('.start-attendance-modal-button.cancel').click(function(){
+    $('.start-attendance-modal').hide();
+    logger.info("User left start attendance modal view by clicking cancel button", fileName);
+});
+
+$('.start-attendance-modal-header > div.x-button').click(function(){
+    $('.start-attendance-modal').hide();
+    logger.info("User left start attendance modal view by clicking X button", fileName);
+});
+
+$('.confirm-start-train-modal-button.cancel').click(function(){
+    $('.confirm-start-train-modal').hide();
+    logger.info("User left start training modal view by clicking cancel button", fileName);
+});
+
+$('.confirm-start-train-modal-header > div.x-button').click(function(){
+    $('.confirm-start-train-modal').hide();
+    logger.info("User left start training modal view by clicking X button", fileName);
+});

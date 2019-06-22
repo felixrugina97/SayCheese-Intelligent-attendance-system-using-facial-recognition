@@ -4,10 +4,10 @@ import json
 import mysql.connector
 import numpy as np
 import os
-from datetime import datetime
-from pathlib import Path
-from dotenv import load_dotenv
 import pickle
+from datetime import datetime
+from dotenv import load_dotenv
+from pathlib import Path
 
 env_path = Path('../..') / '.env'
 load_dotenv(dotenv_path=env_path)

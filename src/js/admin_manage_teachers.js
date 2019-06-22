@@ -1,6 +1,6 @@
 var $ = jQuery = require('jquery');
+
 var logger = require('../../config/logger').Logger;
-var $ = jQuery = require('jquery');
 
 var fileName = 'src::js::admin_manage_courses.js';
 
@@ -44,7 +44,8 @@ $('#teachers tbody').on('click', '#delete-teacher', function() {
     $('#confirm-delete-teacher-text').append("Are you sure you want to " +
         "<span style=\"color:#E74C3C\"><strong>REMOVE</strong></span> <strong>" +
         deleteTeacherName + "</strong> teacher?" +
-        "<br><br><span style=\"color:#f1c40f\"><strong>WARNING</strong></span><br> This will remove all data about him!");
+        "<br><br><span style=\"color:#f1c40f\"><strong>WARNING</strong></span><br>" +
+        "This will remove all data about him!");
 
     $('.confirm-delete-teacher-modal').show();
 });
@@ -64,7 +65,8 @@ $('.confirm-delete-teacher-modal-button.confirm').click(function() {
             logger.debug("Admin deleted with success teacher", fileName);
         },
         error : function(jqXHR, textStatus, err) {
-            logger.error("Failed to delete teacher. Text status: " + textStatus + " Error is: " + err);
+            logger.error("Failed to delete teacher. Text status: " + textStatus +
+                " Error is: " + err);
         }
     });
     $('.confirm-delete-teacher-modal').hide();
@@ -94,6 +96,7 @@ function searchTeacher() {
 function deleteTeacherSnackbar() {
     let snackbar = document.getElementById("delete-student-snackbar");
     snackbar.className = "show";
+
     setTimeout(function() {
         snackbar.className = snackbar.className.replace("show", "");
     }, 3000);

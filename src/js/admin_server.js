@@ -1,5 +1,5 @@
-var express = require('express');
 var bodyParser = require('body-parser');
+var express = require('express');
 
 var connection = require('../../config/connection');
 var logger = require('../../config/logger').Logger;
@@ -29,7 +29,7 @@ getStudents = function() {
                 reject(err);
                 logger.error("Failed to select students." + " Error is: " + err, fileName);
             }
-        })
+        });
     });
 }
 
@@ -40,8 +40,8 @@ app.get('/teachers', function(req, res){
 });
 
 getTeachers = function() {
-    let sqlSelectTeachers = 'SELECT Teacher.ID, Teacher.firstName, Teacher.lastName, Teacher.university, ' +
-    'User.email FROM Teacher, User WHERE User.ID = Teacher.userID';
+    let sqlSelectTeachers = 'SELECT Teacher.ID, Teacher.firstName, Teacher.lastName, ' +
+        'Teacher.university, User.email FROM Teacher, User WHERE User.ID = Teacher.userID';
     return new Promise(function (resolve, reject){
         connection.query(sqlSelectTeachers, function(err, result, fields) {
             if (!err) {
@@ -52,7 +52,7 @@ getTeachers = function() {
                 reject(err);
                 logger.error("Failed to select teachers." + " Error is: " + err, fileName);
             }
-        })
+        });
     });
 }
 
@@ -66,8 +66,8 @@ app.post('/addStudent', (req, res) => {
     let group = req.body.group;
     let subgroup = req.body.subgroup;
 
-    let sqlInsertStudent = 'INSERT INTO Student (firstName, lastName, university, Student.profile, specialization, studyYear, ' +
-    'Student.group, subgroup) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    let sqlInsertStudent = 'INSERT INTO Student (firstName, lastName, university, Student.profile, ' +
+        'specialization, studyYear, Student.group, subgroup) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     connection.query(sqlInsertStudent, [firstName, lastName, university, profile, specialization, studyYear, group, subgroup], function(err, result) {
         if (err) {
             logger.error("Failed to insert student." + " Error is: " + err, fileName);
@@ -75,7 +75,7 @@ app.post('/addStudent', (req, res) => {
         }
         res.json({ok: true});
         logger.debug("Student inserted with success in database", fileName);
-    })
+    });
 });
 
 app.post('/deleteStudent', (req, res) => {
@@ -89,8 +89,7 @@ app.post('/deleteStudent', (req, res) => {
 
     connection.query(sqlDeleteStudent, [studentID, studentID, studentID], function(err, result) {
         if (err) {
-            logger.error("Failed to delete student" + " Error is: " + err);
-            throw err;
+            logger.error("Failed to delete student" + " Error is: " + err, fileName);
         }
         res.json({ok: true});
         logger.debug("Student deleted with success from database", fileName);
@@ -109,8 +108,7 @@ app.post('/deleteTeacher', (req, res) => {
 
     connection.query(sqlDeleteTeacher, [teacherID, teacherID, email], function(err, result) {
         if (err) {
-            logger.error("Failed to delete teacher" + " Error is: " + err);
-            throw err;
+            logger.error("Failed to delete teacher" + " Error is: " + err, fileName);
         }
         res.json({ok: true});
         logger.debug("Teacher deleted with success from database", fileName);

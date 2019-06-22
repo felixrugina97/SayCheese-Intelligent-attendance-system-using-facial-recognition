@@ -40,14 +40,14 @@ $('#login-button').click(function() {
                 else {
                     var popup = $("#password-popup").text("Password does not match")[0];
                     popup.classList.toggle("show");
-                    logger.info("User " + email + " tryed to log in but password does not match", 
+                    logger.info("User " + email + " tryed to log in but password does not match",
                         fileName);
                 }
             }
             else {
                 var popup = $("#email-popup").text("Email does not exists")[0];
                 popup.classList.toggle("show");
-                logger.info("User tryed to connect with " + email + " but this email does not exist", 
+                logger.info("User tryed to connect with " + email + " but this email does not exist",
                     fileName);
             }
         });
