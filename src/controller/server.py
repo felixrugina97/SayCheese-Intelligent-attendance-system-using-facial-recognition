@@ -19,7 +19,8 @@ def write_attendance_data():
         file = open(file_path, 'w')
         file.write(attendance_dictionary['courseID'] + '\n')
         file.write(attendance_dictionary['week'] + '\n')
-        file.write(attendance_dictionary['hour'])
+        file.write(attendance_dictionary['hour'] + '\n')
+        file.write(attendance_dictionary['hall'])
         file.close()
 
     response = "true"

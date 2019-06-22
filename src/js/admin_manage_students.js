@@ -55,7 +55,7 @@ $('#students tbody').on('click', '#upload-photo', function() {
 
 $('#add-student-button').on('click', function() {
     $('.add-student-modal').show();
-})
+});
 
 function searchStudents() {
     var input, filter, table, tr, td, i, txtValue;
@@ -217,7 +217,7 @@ function addStudentSnackbar() {
 function deleteStudentSnackbar() {
     let snackbar = document.getElementById("delete-student-snackbar");
     snackbar.className = "show";
-    
+
     setTimeout(function() {
         snackbar.className = snackbar.className.replace("show", "");
     }, 3000);

@@ -104,6 +104,23 @@
                 </div>
             </div>
         </div>
+        <div class="confirm-delete-student-modal">
+            <div class="confirm-delete-student-modal-content">
+                <div class="confirm-delete-student-modal-header">
+                    <div class="x-button"><span>&times;</span></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="confirm-delete-student-modal-body">
+                        <p id="confirm-delete-student-text"></p>
+                </div>
+                <div style="clear:both;"></div>
+                <div class="confirm-delete-student-modal-footer">
+                    <a href="#" class="confirm-delete-student-modal-button confirm">Confirm</a>
+                    <a href="#" class="confirm-delete-student-modal-button cancel">Cancel</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
         <div class="add-student-modal">
             <div class="add-student-modal-content">
                 <div class="add-student-modal-header">
@@ -212,19 +229,66 @@
                 </div>
             </div>
         </div>
-        <div class="confirm-delete-student-modal">
-            <div class="confirm-delete-student-modal-content">
-                <div class="confirm-delete-student-modal-header">
+        <div class="add-teacher-modal">
+            <div class="add-teacher-modal-content">
+                <div class="add-teacher-modal-header">
                     <div class="x-button"><span>&times;</span></div>
                     <div style="clear:both;"></div>
                 </div>
-                <div class="confirm-delete-student-modal-body">
-                        <p id="confirm-delete-student-text"></p>
+                <div class="add-teacher-modal-body">
+                        <h2>Add teacher</h2>
+                        <form>
+                            <div class="popup">
+                                <span class="popup-text" id="teacher-first-name-popup"></span>
+                            </div>
+                            <div class="input-box">
+                                <p>Enter teacher first name:</p>
+                                <input type="text" id="teacher-first-name" placeholder="First name">
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="teacher-last-name-popup"></span>
+                            </div>
+                            <div class="input-box">
+                                <p>Enter teacher last name:</p>
+                                <input type="text" id="teacher-last-name" placeholder="Last name">
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="teacher-university-popup"></span>
+                            </div>
+                            <p>Select university:</p>
+                            <div class="select-box">
+                                <select id="teacher-select-university" name="Teacher University">
+                                    <option disabled selected value>Select university</option>
+                                    <option value="0">Matematica-Informatica</option>
+                                </select>
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="teacher-email-popup"></span>
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="teacher-wrong-format-email-popup"></span>
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="teacher-wrong-domain-email-popup"></span>
+                            </div>
+                            <div class="input-box">
+                                <p>Enter teacher e-mail:</p>
+                                <input type="text" id="teacher-email" placeholder="e-mail">
+                            </div>
+                            <div class="popup">
+                                <span class="popup-text" id="teacher-password-popup"></span>
+                            </div>
+                            <div class="input-box">
+                                <p>Enter teacher password:</p>
+                                <input type="text" id="teacher-password" placeholder="password">
+                            </div>
+                            <p></p>
+                        </form>
                 </div>
                 <div style="clear:both;"></div>
-                <div class="confirm-delete-student-modal-footer">
-                    <a href="#" class="confirm-delete-student-modal-button confirm">Confirm</a>
-                    <a href="#" class="confirm-delete-student-modal-button cancel">Cancel</a>
+                <div class="add-teacher-modal-footer">
+                    <a href="#" class="add-teacher-modal-button confirm">Create</a>
+                    <a href="#" class="add-teacher-modal-button cancel">Cancel</a>
                     <div style="clear:both;"></div>
                 </div>
             </div>
@@ -253,6 +317,14 @@
         <div id="delete-student-snackbar">
             <div style="margin-right: 20px"><i class="fas fa-check-circle"></i></div>
             <div>Student deleted with success</div>
+        </div>
+        <div id="add-teacher-snackbar">
+            <div style="margin-right: 20px"><i class="fas fa-check-circle"></i></div>
+            <div>Teacher added with success</div>
+        </div>
+        <div id="add-error-teacher-snackbar">
+            <div style="margin-right: 20px"><i class="fas fa-times-circle"></i></div>
+            <div>Failed to create course</div>
         </div>
         <div id="delete-teacher-snackbar">
             <div style="margin-right: 20px"><i class="fas fa-check-circle"></i></div>

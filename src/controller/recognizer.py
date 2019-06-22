@@ -152,10 +152,28 @@ def main():
     )
     cursor = database.cursor()
 
-    camera = cv2.VideoCapture(0)
-    configure_camera(camera)
+    halls = {
+        'F108' : 0,
+        '032'  : 1,
+    }
 
     current_path = os.path.dirname(os.path.realpath(__file__))
+    hall_create_to = "../../data"
+    hall_file_name = "attendance_data.txt"
+    hall_file_path = os.path.join(current_path, hall_create_to, hall_file_name)
+    hall = None
+
+    hall_data = open(hall_file_path)
+    for i, line in enumerate(hall_data):
+        if i == 3:
+            hall = line
+        elif i > 4:
+            break
+    hall_data.close()
+
+    camera = cv2.VideoCapture(halls[hall])
+    configure_camera(camera)
+
     trained_data = "../../data/trained_data/"
     file_path = os.path.join(current_path, trained_data)
 

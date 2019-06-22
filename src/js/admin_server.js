@@ -96,23 +96,58 @@ app.post('/deleteStudent', (req, res) => {
     })
 });
 
+app.post('/addTeacher', (req, res) => {
+    let firstName = req.body.firstName;
+    let lastName = req.body.lastName;
+    let university = req.body.university;
+    let email = req.body.email;
+    let password = req.body.password;
+
+    let sqlInsertStudent = 'START TRANSACTION;' +
+        'INSERT INTO User (email, password, userType) VALUES (?, SHA2(?, 256), 1);' +
+        'INSERT INTO Teacher(userID, firstName, lastName, university) ' +
+        'SELECT User.ID, ?, ?, ? FROM USER ORDER BY ID DESC LIMIT 1;' +
+        'COMMIT;';
+    connection.query(sqlInsertStudent, [email, password, firstName, lastName, university], function(err, result) {
+        if (err) {
+            logger.error("Failed to insert teacher." + " Error is: " + err, fileName);
+            res.status(500).send({error: true});
+        }
+        res.json({ok: true});
+        logger.debug("Teacher inserted with success in database", fileName);
+    });
+});
+
 app.post('/deleteTeacher', (req, res) => {
     teacherID = req.body.teacherID;
     email = req.body.email;
 
-    let sqlDeleteTeacher = 'START TRANSACTION;' +
+    sqlSelectUserID = "SELECT User.ID FROM User WHERE User.email = ?";
+
+    connection.query(sqlSelectUserID, [email], function(err, result) {
+        if (err) {
+            logger.error("Failed to select user ID" + " Error is: " + err);
+            throw err;
+        }
+        let userID = result[0].ID;
+        logger.debug("User ID selected with success from database for deleteting teacher", fileName);
+
+        let sqlDeleteTeacher = 'START TRANSACTION;' +
+        'DELETE FROM Student_Courses_Assignment WHERE Student_Courses_Assignment.userID = ?;' +
+        'DELETE FROM Attendance WHERE Attendance.userID = ?;' +
         'DELETE FROM Course WHERE Course.teacherID = ?;' +
         'DELETE FROM Teacher WHERE Teacher.ID = ?;' +
         'DELETE FROM User WHERE User.email = ?;' +
         'COMMIT;';
 
-    connection.query(sqlDeleteTeacher, [teacherID, teacherID, email], function(err, result) {
-        if (err) {
-            logger.error("Failed to delete teacher" + " Error is: " + err, fileName);
-        }
-        res.json({ok: true});
-        logger.debug("Teacher deleted with success from database", fileName);
-    })
+        connection.query(sqlDeleteTeacher, [userID, userID, teacherID, teacherID, email], function(err, result) {
+            if (err) {
+                logger.error("Failed to delete teacher." + " Error is: " + err,fileName);
+            }
+            res.json({ok: true});
+            logger.debug("Teacher deleted with success from database", fileName);
+        });
+    });
 });
 
 app.listen(3000, function() {

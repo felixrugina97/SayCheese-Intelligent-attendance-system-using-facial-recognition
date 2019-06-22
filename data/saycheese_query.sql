@@ -13,10 +13,10 @@
 -- # --- Create User + Teacher --- #
 -- START TRANSACTION;
 -- 	INSERT INTO User (email, password, userType)
--- 	VALUES ('felix@e-uvt.ro', SHA2('felix!', 256), 1);
+-- 	VALUES ('bogdan@e-uvt.ro', SHA2('bogdan!', 256), 1);
 -- --
 -- 	INSERT INTO Teacher(userID, firstName, lastName, university)
---     SELECT User.ID, 'Felix', 'Rugina', 'Facultatea de Matematica-Informatica'
+--     SELECT User.ID, 'Bogdan', 'Treica', 'Facultatea de Matematica-Informatica'
 --     FROM USER
 --     ORDER BY ID DESC LIMIT 1;
 -- COMMIT;
@@ -101,3 +101,9 @@
 -- COMMIT;
 
 -- INSERT IGNORE INTO Student_Courses_Assignment (courseID, studentID) VALUES(183, 1);
+
+UPDATE Course 
+SET 
+        Course.courseName = IsNull(@Course.courseName, 'Da')
+WHERE 
+     Course.ID = 183

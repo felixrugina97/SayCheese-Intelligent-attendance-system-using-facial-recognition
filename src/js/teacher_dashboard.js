@@ -118,6 +118,7 @@ $('.start-attendance-modal-button.confirm').click(function() {
     courseIDAttendance = $("#select-course-for-attendance").val();
     weekAttendance = $("#select-week-for-attendance").val();
     hourAttendance = $("#select-hour-for-attendance").val();
+    hallAttendance = $("#select-class-for-attendance :selected").text();
 
     if (courseIDAttendance == null) {
         var popup = $("#attendance-course").text("Please select course")[0];
@@ -134,11 +135,17 @@ $('.start-attendance-modal-button.confirm').click(function() {
         popup.classList.toggle("show");
         logger.info("User didn't select hour name field for attendance" , fileName);
     }
+    else if (hallAttendance == 'Select class') {
+        var popup = $("#attendance-class").text("Please select class")[0];
+        popup.classList.toggle("show");
+        logger.info("User didn't select class field for attendance" , fileName);
+    }
     else {
         $('#start-attendance-button').attr("disabled", "disabled");
         $('#train-data-button').attr("disabled", "disabled");
         $("#select-week-for-attendance").prop('selectedIndex', 0);
         $("#select-hour-for-attendance").prop('selectedIndex', 0);
+        $("#select-class-for-attendance").prop('selectedIndex', 0);
 
         attendanceStartedSnackbar();
         $('.start-attendance-modal').hide();
@@ -146,7 +153,8 @@ $('.start-attendance-modal-button.confirm').click(function() {
         var attendanceData = {
             'courseID' : courseIDAttendance,
             'week' : weekAttendance,
-            'hour' : hourAttendance
+            'hour' : hourAttendance,
+            'hall' : hallAttendance
         }
 
         $.ajax({

@@ -17,10 +17,10 @@ dialog.showErrorBox = function(title, content) {
     logger.error(`${title}\n${content}`, fileName + " {ELECTRON ERROR}");
 };
 
-var teacherID;
+var teacherUserID;
 
 app.post('/userID', (req, res) => {
-    teacherID = req.body.ID;
+    teacherUserID = req.body.ID;
     res.json({ok: true});
     logger.debug("Teacher ID received with success", fileName);
 });
@@ -41,10 +41,11 @@ getStudents = function() {
     'JOIN Course ON Student_Courses_Assignment.courseID = Course.ID ' +
     'JOIN Attendance ON Student_Courses_Assignment.studentID = Attendance.studentID ' +
     'AND Student_Courses_Assignment.courseID = Attendance.courseID ' +
+    'AND Student_Courses_Assignment.userID = ? ' +
     'ORDER BY Course.courseName, Student.firstName, Student.lastName, Student.group, Student.subgroup'
 
     return new Promise(function (resolve, reject){
-        connection.query(sqlSelectStudentsAndAttendance, function(err, result, fields) {
+        connection.query(sqlSelectStudentsAndAttendance, [teacherUserID], function(err, result, fields) {
             if (!err) {
                 resolve(result);
                 logger.debug("Students and attendance selected with success from database", fileName);
@@ -64,9 +65,9 @@ app.get('/course', function(req, res){
 });
 
 getCourses = function() {
-    let sqlSelectCourses = 'SELECT * FROM Course WHERE teacherID = ? ORDER BY courseName';
+    let sqlSelectCourses = 'SELECT * FROM Course WHERE Course.userID = ? ORDER BY courseName';
     return new Promise(function (resolve, reject){
-        connection.query(sqlSelectCourses, [teacherID], function(err, result, fields) {
+        connection.query(sqlSelectCourses, [teacherUserID], function(err, result, fields) {
             if (!err) {
                 resolve(result);
                 logger.debug("Courses selected with success from database", fileName);
@@ -112,18 +113,28 @@ getAssignedCourses = function() {
 }
 
 app.post('/createCourse', (req, res) => {
-    courseID = req.body.ID;
     courseName = req.body.courseName;
     courseType = req.body.courseType;
-    let sql = 'INSERT INTO Course (ID, teacherID, courseName, courseType) VALUES (?, ?, ?, ?)';
-    connection.query(sql, [courseID, teacherID, courseName, courseType], function(err, result) {
+    let selectTeacherID = 'SELECT Teacher.ID FROM Teacher WHERE userID = ?';
+
+    connection.query(selectTeacherID, [teacherUserID], function(err, result) {
         if (err) {
-            logger.error("Failed to insert course." + " Error is: " + err, fileName);
-            res.status(500).send({error: true});
+            logger.error("Failed to select teacher ID" + " Error is: " + err);
+            throw err;
         }
-        res.json({ok: true});
-        logger.debug("Course inserted with success in database", fileName);
-    })
+        let teacherID = result[0].ID;
+        logger.debug("Teacher ID selected with success from database", fileName);
+
+        let createCourse = 'INSERT INTO Course (teacherID, userID, courseName, courseType) VALUES (?, ?, ?, ?)';
+        connection.query(createCourse, [teacherID, teacherUserID, courseName, courseType], function(err, result) {
+            if (err) {
+                logger.error("Failed to insert course." + " Error is: " + err, fileName);
+                res.status(500).send({error: true});
+            }
+            res.json({ok: true});
+            logger.debug("Course inserted with success in database", fileName);
+        });
+    });
 });
 
 app.post('/deleteCourse', (req, res) => {
@@ -163,17 +174,17 @@ app.post('/assignStudentsToCourse', (req, res) => {
         }
         logger.debug("Students selected with success from database for assigment", fileName);
         if (result && result.length > 0) {
-            var sqlAssignStudentsToCourse = 'START TRANSACTION;' +
-            'INSERT IGNORE INTO Student_Courses_Assignment (courseID, studentID) VALUES ?;' +
-            'INSERT IGNORE INTO Attendance (courseID, studentID) VALUES ?;' +
+            let sqlAssignStudentsToCourse = 'START TRANSACTION;' +
+            'INSERT IGNORE INTO Student_Courses_Assignment (courseID, studentID, userID) VALUES ?;' +
+            'INSERT IGNORE INTO Attendance (courseID, studentID, userID) VALUES ?;' +
             'COMMIT;'
             var values = [];
             for (var i = 0; i < result.length; i++) {
-                values.push([courseID, result[i].ID]);
+                values.push([courseID, result[i].ID, teacherUserID]);
             }
             connection.query(sqlAssignStudentsToCourse, [values, values], function(err, result) {
                 if (err) {
-                    logger.error("Failed to assign students to course" + " Error is: " + err);
+                    logger.error("Failed to assign students to course" + " Error is: " + err,fileName);
                 }
                 res.json({ok: true});
                 logger.debug("Students assigned with success to course", fileName);
