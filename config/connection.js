@@ -3,7 +3,7 @@ const env = require('custom-env').env(true);
 
 var logger = require('./logger').Logger;
 
-var fileName = 'utils::connection.js';
+var fileName = 'config::connection.js';
 
 var connection = mysql.createConnection({
 	host     : process.env.DB_HOST,
@@ -19,6 +19,7 @@ connection.connect((err) => {
         logger.error("Connection with database failed", fileName);
         throw err;
     }
+    
     logger.info("Connection with database succeeded", fileName);
 });
 

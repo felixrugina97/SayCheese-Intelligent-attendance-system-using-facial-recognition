@@ -36,7 +36,7 @@ Logger.warning = function(message, file) {
 };
 
 Logger.error = function(message, file) {
-    let log = "[" + new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '') + "]"+
+    let log = "[" + new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '') + "]" +
         " [ERR]" + "[" + file + "] : " + message + "\n";
 
     fs.appendFile('./logs/saycheese.log', log, function (err) {

@@ -54,20 +54,14 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-.env
-
 # next.js build output
 .next
 
 # ignore DS_STORE
 **/.DS_STORE
 
-# folder to ignore
-data/recognizer
-data/data_set
-students_photos/*
-data/attendance_data.txt
+# files to ignore
+saycheese_query.sql
 
 # .vscode
 .vscode

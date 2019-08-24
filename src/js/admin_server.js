@@ -1,5 +1,8 @@
 var bodyParser = require('body-parser');
 var express = require('express');
+var fs = require('fs');
+var electron = require('electron');
+var electronApp = electron.app;
 
 var connection = require('../../config/connection');
 var logger = require('../../config/logger').Logger;
@@ -91,9 +94,13 @@ app.post('/deleteStudent', (req, res) => {
         if (err) {
             logger.error("Failed to delete student" + " Error is: " + err, fileName);
         }
+
+        let filePath = electronApp.getAppPath();
+        fs.unlinkSync(filePath + '/data/data_set/' + studentID + '.jpg');
+
         res.json({ok: true});
         logger.debug("Student deleted with success from database", fileName);
-    })
+    });
 });
 
 app.post('/addTeacher', (req, res) => {

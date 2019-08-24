@@ -101,9 +101,3 @@
 -- COMMIT;
 
 -- INSERT IGNORE INTO Student_Courses_Assignment (courseID, studentID) VALUES(183, 1);
-
-UPDATE Course 
-SET 
-        Course.courseName = IsNull(@Course.courseName, 'Da')
-WHERE 
-     Course.ID = 183
